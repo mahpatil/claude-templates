@@ -1,64 +1,63 @@
-Title: Engineering Principles
+# Engineering Principles
 
-1. Core tenets
-- Clarity over cleverness: Optimize for readability and explicitness.
-- Small, safe changes: Incremental delivery with tests and feature flags.
-- Separation of concerns: Isolate domains, interfaces, and implementations.
-- Defensive boundaries: Validate inputs at edges; trust internal invariants.
-- Observability-first: Logs, metrics, traces are first-class.
+Quick reference for core engineering principles. For detailed standards, see [standards/](./standards/).
 
-2. Tradeoffs
-- Performance vs maintainability: Prefer maintainable solutions; optimize hotspots proven by profiling.
-- Consistency vs local optimization: Favor repo-wide conventions; exceptions must be justified and documented.
-- Abstraction vs simplicity: Abstract only repeated patterns; avoid premature indirection.
+---
 
-3. Security & privacy
-- Least privilege: Minimize permissions and accessible data.
-- Input validation: Sanitize at boundaries; reject malformed or unexpected inputs.
-- Secrets management: Never hardcode; use vaults/env; rotate keys.
-- PII handling: Mask at rest and in logs; adhere to data minimization.
+## Core Tenets
 
-4. Reliability
-- Idempotence: Make external effects safe to retry.
-- Timeouts & retries: Bounded retries with backoff; circuit breakers for unstable dependencies.
-- Fail fast: Detect and surface errors early; avoid silent failures.
+- **Clarity over cleverness**: Optimize for readability and explicitness
+- **Small, safe changes**: Incremental delivery with tests and feature flags
+- **Separation of concerns**: Isolate domains, interfaces, and implementations
+- **Defensive boundaries**: Validate inputs at edges; trust internal invariants
+- **Observability-first**: Logs, metrics, traces are first-class citizens
 
-5. Performance targets
-- Latency budgets: Define per endpoint/service SLOs; e.g., p95 ≤ 250ms for critical APIs.
-- Resource usage: Bound memory/CPU; monitor and alert on regressions.
-- Start-up time: Services start within defined thresholds; lazy-init non-critical components.
+---
 
-6. Java-specific
-- Immutability: Use records and immutable collections where possible.
-- Interfaces-first: Define clear interfaces; inject implementations; avoid static singletons.
-- Concurrency: Prefer `CompletableFuture`/structured concurrency; avoid unbounded thread pools.
+## Cloud-Native Principles
 
-7. Python-specific
-- Functional core / imperative shell: Keep business logic pure; isolate IO.
-- Type-safe boundaries: Strict mypy at interfaces; treat `Any` as smell.
-- Concurrency: Use `asyncio` or `concurrent.futures` appropriately; no shared mutable state across threads.
+1. **Composable Architecture & DDD** - Bounded contexts, ubiquitous language
+2. **API-First & Contract-Driven** - Independent services with clear contracts
+3. **Cloud Portability** - Avoid vendor lock-in, use open standards
+4. **Observability** - Tracing, logging, metrics, alerting
+5. **Zero Trust Security** - Authenticate, authorize, encrypt all flows
+6. **Performance Optimization** - Caching, compression, efficient algorithms
+7. **High Availability** - Redundancy, failover, graceful degradation
+8. **Reliability & Resilience** - Fault tolerance, chaos engineering
+9. **Cost Optimization** - Right-sizing, auto-scaling, FinOps
+10. **Automation First** - CI/CD, automated testing, security scanning
+11. **Infrastructure as Code** - Version-controlled, repeatable deployments
 
-8. Cloud-Native Microservices
-- Statelessness: Services must be stateless; externalize all state to persistent stores for horizontal scaling.
-- Resilience Patterns: Implement circuit breakers, retries with backoff, timeouts, and bulkheads for fault isolation.
-- Infrastructure as Code: All infrastructure, configuration, and deployments are version-controlled, auditable code.
-- Immutability: Use immutable containers and deployments; avoid in-place updates to ensure consistency and simplify rollbacks.
-- Backwards Compatibility: Maintain API stability; support multiple versions during transitions for independent service evolution.
-- Cost Optimization: Right-size resources, monitor cloud spending, use auto-scaling and spot instances to minimize waste.
-- Team Autonomy: Organize teams around business domains; enable independent service ownership and deployment (Conway's Law).
-- Graceful Degradation: Services fail safely with reduced functionality; prioritize critical paths to prevent cascade failures.
+---
 
-using open standards
-libraires with 0 critical and high vulnerabilities\
-gradle for build
-5. Security Considerations
+## Tradeoffs
 
-OAuth2/JWT resource server configuration
-OWASP dependency check in CI/CD
-Non-root Docker user
-CSP headers configured
-6. Kubernetes-Native
+| Decision | Guidance |
+|----------|----------|
+| Performance vs Maintainability | Prefer maintainable; optimize proven hotspots |
+| Consistency vs Local Optimization | Favor org-wide conventions |
+| Abstraction vs Simplicity | Abstract only repeated patterns (Rule of Three) |
 
-Health probes (liveness/readiness) configured
-HPA with CPU/memory scaling
-Resource requests/limits defined
+---
+
+## Technology Selection
+
+- Open standards preferred
+- Libraries with zero critical/high vulnerabilities
+- Active maintenance and community support
+- Clear licensing compatible with commercial use
+
+---
+
+## Detailed Standards
+
+| Document | Content |
+|----------|---------|
+| [PRINCIPLES.md](./standards/PRINCIPLES.md) | Full principles with rationale |
+| [ARCHITECTURE-PATTERNS.md](./standards/ARCHITECTURE-PATTERNS.md) | DDD, Hexagonal, CQRS, Event-Driven |
+| [PLATFORM-STANDARDS.md](./standards/PLATFORM-STANDARDS.md) | K8s, Service Mesh, GitOps, DR |
+| [TECHNOLOGY-STANDARDS.md](./standards/TECHNOLOGY-STANDARDS.md) | Java/Spring, React/TypeScript |
+| [SECURITY-STANDARDS.md](./standards/SECURITY-STANDARDS.md) | Zero-trust, secrets, compliance |
+| [DEVOPS-STANDARDS.md](./standards/DEVOPS-STANDARDS.md) | CI/CD, deployment strategies |
+| [OBSERVABILITY-STANDARDS.md](./standards/OBSERVABILITY-STANDARDS.md) | Metrics, tracing, logging |
+| [CHECKLISTS.md](./standards/CHECKLISTS.md) | Implementation checklists |
