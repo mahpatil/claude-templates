@@ -4,41 +4,6 @@ Standards for implementing core architectural patterns in cloud-native systems.
 
 ---
 
-## Hexagonal Architecture (Ports & Adapters)
-
-### Overview
-Hexagonal architecture separates core business logic from external concerns through ports (interfaces) and adapters (implementations).
-
-### Structure
-```
-src/main/java/
-├── domain/              # Core business logic (NO framework dependencies)
-│   ├── model/           # Entities, Value Objects, Aggregates
-│   ├── repository/      # Repository interfaces (ports)
-│   ├── service/         # Domain services
-│   └── event/           # Domain events
-├── application/         # Application services and use cases
-│   ├── command/         # Command handlers (write operations)
-│   ├── query/           # Query handlers (read operations)
-│   └── dto/             # Data transfer objects
-├── infrastructure/      # Technical implementations (adapters)
-│   ├── persistence/     # Database implementations
-│   ├── messaging/       # Event publishing/consuming
-│   ├── cache/           # Caching implementations
-│   └── external/        # External service clients
-└── api/                 # Inbound adapters
-    ├── rest/            # REST controllers
-    └── graphql/         # GraphQL resolvers
-```
-
-### Rules
-1. **Domain has zero dependencies** on frameworks or infrastructure
-2. **Ports are interfaces** defined in the domain layer
-3. **Adapters implement ports** and live in infrastructure
-4. **Dependencies point inward** toward the domain
-
----
-
 ## Domain-Driven Design (DDD)
 
 ### Strategic Patterns
@@ -142,6 +107,42 @@ public class PricingService {
 
 ---
 
+## Hexagonal Architecture (Ports & Adapters)
+
+### Overview
+Hexagonal architecture separates core business logic from external concerns through ports (interfaces) and adapters (implementations).
+
+### Structure of a Hexagonal service
+```
+src/main/java/
+├── domain/              # Core business logic (NO framework dependencies)
+│   ├── model/           # Entities, Value Objects, Aggregates
+│   ├── repository/      # Repository interfaces (ports)
+│   ├── service/         # Domain services
+│   └── event/           # Domain events
+├── application/         # Application services and use cases
+│   ├── command/         # Command handlers (write operations)
+│   ├── query/           # Query handlers (read operations)
+│   └── dto/             # Data transfer objects
+├── infrastructure/      # Technical implementations (adapters)
+│   ├── persistence/     # Database implementations
+│   ├── messaging/       # Event publishing/consuming
+│   ├── cache/           # Caching implementations
+│   └── external/        # External service clients
+└── api/                 # Inbound adapters
+    ├── rest/            # REST controllers
+    └── graphql/         # GraphQL resolvers
+```
+
+### Rules
+1. **Domain has zero dependencies** on frameworks or infrastructure
+2. **Ports are interfaces** defined in the domain layer
+3. **Adapters implement ports** and live in infrastructure
+4. **Dependencies point inward** toward the domain
+
+---
+
+
 ## Event-Driven Architecture
 
 ### Event Types
@@ -225,7 +226,7 @@ spring:
 ### When to Use
 - Complex domains with different read/write patterns
 - High read-to-write ratio
-- Need for optimized read models
+- Need for optimized read models with simpler structure and queries
 - Event sourcing systems
 
 ### Structure

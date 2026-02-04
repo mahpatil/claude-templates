@@ -41,6 +41,7 @@ Treat all infrastructure, configuration, and deployments as version-controlled, 
 
 ### 12. Open source and open standards
 Rely on open source and open standards such as OAUTH, Open Telemetry, Java, Spring, Kubernetes over proprietary standards, protocols, libraries.
+
 ---
 
 ## Engineering Tenets
@@ -65,7 +66,7 @@ Rely on open source and open standards such as OAUTH, Open Telemetry, Java, Spri
 - Validate inputs at system edges
 - Trust internal invariants after validation
 - Fail fast on invalid state
-    
+
 ---
 
 ## Tradeoffs & Decision Framework

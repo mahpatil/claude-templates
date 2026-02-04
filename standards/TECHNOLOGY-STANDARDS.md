@@ -1,6 +1,6 @@
 # Technology Standards
 
-Standards for technology selection and implementation.
+Technology stack and standards for selection and implementation.
 
 ---
 
