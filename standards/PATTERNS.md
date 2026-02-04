@@ -311,7 +311,7 @@ resilience4j:
         max-wait-duration: 100ms
 ```
 
-### Patterns Summary
+### Resilience Patterns Summary
 | Pattern | Purpose | Configuration |
 |---------|---------|---------------|
 | Circuit Breaker | Stop cascading failures | failure threshold, wait duration |

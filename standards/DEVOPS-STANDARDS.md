@@ -1,6 +1,6 @@
 # DevOps Standards
 
-Standards for CI/CD, deployment, and developer experience.
+Tools and standards for CI/CD, deployment, and developer experience.
 
 ---
 
@@ -27,6 +27,7 @@ Standards for CI/CD, deployment, and developer experience.
 ### Trunk-Based Development
 - `main` is the single source of truth
 - `main` is always deployable
+- `main` is protected and requires PR approvals
 - Short-lived feature branches (< 2 days)
 - No long-running release branches
 
@@ -60,8 +61,8 @@ test: add integration tests for payment flow
 └─────────────┘    └─────────────┘    └─────────────┘    └─────────────┘
      │                   │                   │                   │
      ├── Compile         ├── Unit            ├── SAST            ├── Non-Prod
-     ├── Dependencies    ├── Integration     ├── Dependency      ├── Prod
-     └── Docker Build    ├── Contract        │   Check           └── Rollback
+     ├── Dependencies    ├── Integration     ├── SCA             ├── Prod
+     └── Artifact Build  ├── Contract        ├── DAST            └── Release (BG/Canary)
                          └── Performance     └── Container Scan
 ```
 
@@ -140,7 +141,7 @@ jobs:
 ```
 Feature Branch -> Non-Production -> Production
        │               │                │
-       └── PR Tests    └── Full Tests   └── Canary + Full
+       └── PR Tests    └── Full Tests   └── Blue Green/Canary + Full
 ```
 
 ### Canary Deployment

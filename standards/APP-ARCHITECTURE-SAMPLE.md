@@ -233,7 +233,7 @@ flowchart TB
     CloudRun --> CloudSQL
     CloudRun --> Memorystore
     CloudRun --> PubSub
-    CloudRun --> CloudMonitor
+    CloudRun --> GCPServices
 ```
 
 ---
@@ -527,7 +527,7 @@ kubectl port-forward svc/storefront-ui 3000:80
 ## Related Standards
 
 - [PRINCIPLES.md](./PRINCIPLES.md) - Core engineering principles
-- [ARCHITECTURE-PATTERNS.md](./ARCHITECTURE-PATTERNS.md) - DDD, Hexagonal patterns
+- [PATTERNS.md](./PATTERNS.md) - DDD, Hexagonal, Event driven & Resilience patterns
 - [TECHNOLOGY-STANDARDS.md](./TECHNOLOGY-STANDARDS.md) - Java/Spring, React standards
 - [SECURITY-STANDARDS.md](./SECURITY-STANDARDS.md) - Security implementation
 - [DEVOPS-STANDARDS.md](./DEVOPS-STANDARDS.md) - CI/CD pipelines
