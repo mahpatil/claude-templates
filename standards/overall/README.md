@@ -18,7 +18,7 @@ Our engineering standards ensure that every team builds reliable, maintainable, 
 
 ## Table of Contents
 
-- [Core Principles](#core-principles)
+- [Principles](#principles)
 - [Why Overall Standards Matter](#why-overall-standards-matter)
 - [When to Use These Standards](#when-to-use-these-standards)
 - [Decision Framework](#decision-framework)
@@ -27,7 +27,7 @@ Our engineering standards ensure that every team builds reliable, maintainable, 
 
 ---
 
-## Core Principles [here](./principles.md)
+## Principles [here](./principles.md)
 
 ---
 
@@ -196,19 +196,18 @@ Consider:
 
 ### Documentation
 
-- **[Engineering Principles](engineering-principles.md)** - Core values and practices
+- **[Principles](principles.md)** - Core principles and values
 - **[Decision Framework](decision-framework.md)** - How to make technical decisions
 - **[Glossary](glossary.md)** - Common terminology and definitions
-- **[Getting Started](getting-started.md)** - Onboarding guide
-- **[ADRs](adrs/)** - Architecture Decision Records
 
 ### Related Standards
-
+TBC
+<!-- 
 - [Cloud-Native Standards](../02-cloud-native/README.md)
 - [Microservices Standards](../03-microservices/README.md)
 - [API Design Standards](../04-api-design/README.md)
 - [DevSecOps Standards](../07-devsecops/README.md)
-- [Observability Standards](../09-observability/README.md)
+- [Observability Standards](../09-observability/README.md) -->
 
 ### Industry References
 
@@ -218,11 +217,12 @@ Consider:
 - [Accelerate](https://itrevolution.com/product/accelerate/) - Building and scaling high performing technology organizations
 
 ### Tools and Templates
-
+TBC
+<!-- 
 - **ADR Template** - Document architecture decisions
 - **Post-Mortem Template** - Blameless incident analysis
 - **Tech Debt Register** - Track and prioritize technical debt
-- **RFC Process** - Propose changes to standards
+- **RFC Process** - Propose changes to standards -->
 
 ---
 
