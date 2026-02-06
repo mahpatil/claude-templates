@@ -1,6 +1,6 @@
 # Repository Structure
 ```
-technical-standards-playbook/
+engineering-playbook/
 ├── README.md                           # Main project README
 ├── CONTRIBUTING.md                     # Contribution guidelines
 ├── LICENSE                             # MIT License

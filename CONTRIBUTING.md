@@ -26,14 +26,14 @@ This project adheres to a code of conduct. By participating, you agree to uphold
 We strive to continuously improve these standards based on your feedback.
 Found a bug or have a suggestion?
 
-1. Check [existing issues](https://github.com/mahpatil/technical-standards-playbook/issues)
+1. Check [existing issues](https://github.com/mahpatil/engineering-playbook/issues)
 2. Propose changes via RFC process
 3. If new, create an issue with:
    - Clear title
    - Detailed description
    - Steps to reproduce (for bugs)
    - Expected vs. actual behavior
-4. Share success stories or challenges in #technical-standards-playbook
+4. Share success stories or challenges in #engineering-playbook
 
 ### Suggesting New Standards
 
@@ -255,8 +255,8 @@ Pull requests are reviewed for:
 
 ## Questions?
 
-- **General questions**: Open a [discussion](https://github.com/your-org/technical-standards-playbook/discussions)
-- **Bug reports**: Open an [issue](https://github.com/your-org/technical-standards-playbook/issues)
+- **General questions**: Open a [discussion](https://github.com/mahpatil/engineering-playbook/discussions)
+- **Bug reports**: Open an [issue](https://github.com/mahpatil/engineering-playbook/issues)
 - **Security issues**: Email security@your-org.com
 
 ## License

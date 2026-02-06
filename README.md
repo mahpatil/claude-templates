@@ -27,8 +27,8 @@ This repository contains battle-tested technical standards and practices develop
 ## 🚀 Quick Start
 ```bash
 # Clone the repository
-git clone https://github.com/your-org/technical-standards-playbook.git
-cd technical-standards-playbook
+git clone https://github.com/mahpatil/engineering-playbook.git
+cd engineering-playbook
 
 # Explore standards
 cd standards/ci-cd-pipeline
