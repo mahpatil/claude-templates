@@ -1,0 +1,1 @@
+commit current changes to git repo. if not git repo initialise and then commit.
