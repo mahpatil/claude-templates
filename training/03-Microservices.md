@@ -71,20 +71,33 @@ Each microservice handles **one** business capability, and only one.
 
 Deploy **one** service without touching the others.
 
-```
-Before (Monolith):
-Team A (Users)   ──┐
-Team B (Orders)  ├──► Merge ──► Test ──► Deploy ALL or NOTHING
-Team C (Payments)──┘
-Deploy success? Great, all 3 changes go live.
-Deploy failure? All changes roll back, blocking all 3 teams.
+**Before (Monolith):**
 
-After (Microservices):
-Team A deploys Users Service           ✓ Success
-Team B deploys Orders Service          ✓ Success
-Team C deploys Payments Service        ✗ Fails—ONLY Payments rolled back
-                                         Users and Orders still live
-                                         Team C can fix and redeploy in 10 min
+```mermaid
+graph LR
+    A["Team A (Users)"] --> M["Merge"]
+    B["Team B (Orders)"] --> M
+    C["Team C (Payments)"] --> M
+    M --> T["Test"]
+    T --> D["Deploy ALL or NOTHING"]
+    D -->|Success| S["All 3 changes go live"]
+    D -->|Failure| F["All changes roll back\nAll 3 teams blocked"]
+
+    style F fill:#f55,color:#fff
+```
+
+**After (Microservices):**
+
+```mermaid
+graph LR
+    A["Team A"] -->|deploy| US["Users Service ✓"]
+    B["Team B"] -->|deploy| OS["Orders Service ✓"]
+    C["Team C"] -->|deploy| PS["Payments Service ✗"]
+    PS -->|rollback| FIX["Team C fixes & redeploys\nUsers and Orders still live"]
+
+    style US fill:#4a4,color:#fff
+    style OS fill:#4a4,color:#fff
+    style PS fill:#f55,color:#fff
 ```
 
 **Benefit:** Each team ships independently. One failure doesn't block others.
