@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cloud-Native & Microservices Training</title>
-    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.mjs" type="module"></script>
+    <script src="https://unpkg.com/mermaid@10/dist/mermaid.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -1183,21 +1183,17 @@ graph LR
                     <div class="diagram-container">
                         <div class="mermaid">
 graph LR
-    Plan["📋 PLAN<br/>Design ML System<br/>- Identify ML opportunities<br/>- Data requirements<br/>- Model selection<br/>- Success metrics"]
-
-    Build["🔨 BUILD<br/>Development & Training<br/>- Data pipeline<br/>- Model training<br/>- Feature engineering<br/>- API endpoints"]
-
-    Test["✅ TEST<br/>Validation & Quality<br/>- Model accuracy<br/>- Edge cases<br/>- Performance<br/>- Bias detection<br/>- Integration tests"]
-
-    Deploy["🚀 DEPLOY<br/>Production Release<br/>- Model serving<br/>- Canary deployment<br/>- Monitoring<br/>- Feedback loops"]
-
-    Monitor["📊 MONITOR<br/>Continuous Learning<br/>- Model drift detection<br/>- Performance tracking<br/>- Retraining triggers<br/>- User feedback"]
+    Plan["PLAN"]
+    Build["BUILD"]
+    Test["TEST"]
+    Deploy["DEPLOY"]
+    Monitor["MONITOR"]
 
     Plan --> Build
     Build --> Test
     Test --> Deploy
     Deploy --> Monitor
-    Monitor -.->|Continuous Improvement| Plan
+    Monitor -.-> Plan
 
     style Plan fill:#667eea,stroke:#667eea,color:#fff
     style Build fill:#4caf50,stroke:#4caf50,color:#fff
@@ -1248,19 +1244,13 @@ graph LR
                         <div class="diagram-container" style="margin-top: 15px;">
                             <div class="mermaid">
 graph TB
-    Raw["Raw Data Sources<br/>- Databases<br/>- APIs<br/>- Logs<br/>- User Events"]
-
-    Pipeline["Data Pipeline<br/>- ETL<br/>- Cleaning<br/>- Transformation"]
-
-    FS["Feature Store<br/>Centralized Features<br/>- user_age<br/>- purchase_history<br/>- browsing_behavior"]
-
-    Training["Model Training<br/>- Supervised Learning<br/>- Feature Selection<br/>- Hyperparameter Tuning"]
-
-    Model["Trained Model<br/>weights & parameters"]
-
-    Serving["Model Serving<br/>REST API<br/>gRPC<br/>Batch Processing"]
-
-    Apps["Applications<br/>- Recommendations<br/>- Search Ranking<br/>- Pricing Engine"]
+    Raw["Raw Data"]
+    Pipeline["Data Pipeline"]
+    FS["Feature Store"]
+    Training["Model Training"]
+    Model["Trained Model"]
+    Serving["Model Serving"]
+    Apps["Applications"]
 
     Raw --> Pipeline
     Pipeline --> FS
@@ -1332,9 +1322,9 @@ graph TB
                         <div class="diagram-container" style="margin-top: 15px;">
                             <div class="mermaid">
 graph TD
-    A["🏔️ End-to-End Tests<br/>(Full system integration)<br/>1-2 tests"]
-    B["🧪 Integration Tests<br/>(Model + API + DB)<br/>10-20 tests"]
-    C["⚙️ Unit Tests<br/>(Individual components)<br/>100+ tests"]
+    A["End-to-End Tests"]
+    B["Integration Tests"]
+    C["Unit Tests"]
 
     C --> B --> A
 
@@ -1383,19 +1373,13 @@ graph TD
                         <div class="diagram-container" style="margin-top: 15px;">
                             <div class="mermaid">
 graph TB
-    Model["Model in Production<br/>Makes predictions"]
-
-    Monitor["Monitor Performance<br/>- Track accuracy<br/>- Watch for drift<br/>- Collect feedback"]
-
-    Data["Collect New Data<br/>- User feedback<br/>- Business outcomes<br/>- Real-world results"]
-
-    Trigger{"Drift<br/>Detected?"}
-
-    Retrain["Retrain Model<br/>With new data"]
-
-    Test["Test New Model<br/>Validate accuracy"]
-
-    Deploy["Deploy New Model<br/>Replace old model"]
+    Model["Model in Production"]
+    Monitor["Monitor Performance"]
+    Data["Collect New Data"]
+    Trigger{"Drift Detected?"}
+    Retrain["Retrain Model"]
+    Test["Test New Model"]
+    Deploy["Deploy New Model"]
 
     Model --> Monitor
     Monitor --> Data
@@ -1430,22 +1414,22 @@ graph TB
                     <div class="diagram-container">
                         <div class="mermaid">
 graph TB
-    Client["Client Applications"]
+    Client["Clients"]
     Gateway["API Gateway"]
 
     Client --> Gateway
 
     Gateway --> Users["Users Service"]
-    Gateway --> Recs["Recommendations Service<br/>(ML-Powered)<br/>- Feature Store<br/>- Model Serving<br/>- Feedback Loop"]
-    Gateway --> Search["Search Service<br/>(ML-Powered)<br/>- Ranking Model<br/>- Embeddings<br/>- Personalization"]
-    Gateway --> Fraud["Fraud Service<br/>(ML-Powered)<br/>- Real-time Detection<br/>- Pattern Recognition"]
+    Gateway --> Recs["Recommendations Service"]
+    Gateway --> Search["Search Service"]
+    Gateway --> Fraud["Fraud Service"]
 
     Users --> UserDB["UserDB"]
-    Recs --> RecsDB["Features DB<br/>+ Models"]
-    Search --> SearchDB["Search Index<br/>+ Models"]
-    Fraud --> FraudDB["Transaction DB<br/>+ Models"]
+    Recs --> RecsDB["Features DB"]
+    Search --> SearchDB["Search Index"]
+    Fraud --> FraudDB["Transaction DB"]
 
-    Monitor["Monitoring Service<br/>- Model accuracy tracking<br/>- Drift detection<br/>- Retraining triggers"]
+    Monitor["Monitoring Service"]
 
     Recs -.-> Monitor
     Search -.-> Monitor
@@ -1633,12 +1617,18 @@ graph TB
         </div>
     </div>
 
-    <script type="module">
-        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    <script>
+        // Wait for Mermaid to load
+        if (typeof mermaid !== 'undefined') {
+            mermaid.initialize({
+                startOnLoad: true,
+                theme: 'base',
+                logLevel: 'error'
+            });
+            mermaid.contentLoaded();
+        }
 
-        mermaid.initialize({ startOnLoad: true, theme: 'default', securityLevel: 'loose' });
-
-        window.openTab = function(evt, tabName) {
+        function openTab(evt, tabName) {
             // Hide all tab contents
             const tabContents = document.querySelectorAll('.tab-content');
             tabContents.forEach(content => {
@@ -1655,20 +1645,35 @@ graph TB
             document.getElementById(tabName).classList.add('active');
             evt.currentTarget.classList.add('active');
 
-            // Re-render mermaid diagrams with a small delay
-            setTimeout(() => {
-                mermaid.run();
-            }, 100);
-        };
+            // Re-render mermaid diagrams
+            if (typeof mermaid !== 'undefined') {
+                setTimeout(() => {
+                    try {
+                        mermaid.contentLoaded();
+                    } catch(e) {
+                        console.log('Mermaid re-render:', e);
+                    }
+                }, 50);
+            }
+        }
 
-        window.toggleCollapsible = function(button) {
+        function toggleCollapsible(button) {
             button.classList.toggle('active');
             const content = button.nextElementSibling;
             content.classList.toggle('active');
-        };
+        }
 
-        // Initial render
-        mermaid.run();
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof mermaid !== 'undefined') {
+                mermaid.initialize({
+                    startOnLoad: true,
+                    theme: 'base',
+                    logLevel: 'error'
+                });
+                mermaid.contentLoaded();
+            }
+        });
     </script>
 </body>
 </html>
