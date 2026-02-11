@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cloud-Native & Microservices Training</title>
-    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.mjs" type="module"></script>
     <style>
         * {
             margin: 0;
@@ -447,6 +447,7 @@
                 <button class="tab-btn" onclick="openTab(event, 'module5')">🔄 Problem-Solution</button>
                 <button class="tab-btn" onclick="openTab(event, 'module6')">📚 Principles</button>
                 <button class="tab-btn" onclick="openTab(event, 'module7')">🗺️ Roadmap</button>
+                <button class="tab-btn" onclick="openTab(event, 'module8')">🤖 AI-Native Dev</button>
             </div>
 
             <!-- Module 1: The Journey -->
@@ -1167,6 +1168,463 @@ graph LR
                     </ol>
                 </div>
             </div>
+
+            <!-- Module 8: AI-Native Development -->
+            <div id="module8" class="tab-content">
+                <div class="module-section">
+                    <h2>🤖 AI-Native Development</h2>
+
+                    <h3>The Paradigm Shift</h3>
+                    <div class="concept-card">
+                        <p>AI-Native development means designing systems to leverage AI from day one—not bolting it on later. It's about recognizing that AI-powered features are now core business capabilities, not optional enhancements. Modern microservices must include AI services, inference endpoints, feature stores, and continuous learning loops as first-class citizens.</p>
+                    </div>
+
+                    <h3>Plan-Build-Test-Deploy Workflow</h3>
+                    <div class="diagram-container">
+                        <div class="mermaid">
+graph LR
+    Plan["📋 PLAN<br/>Design ML System<br/>- Identify ML opportunities<br/>- Data requirements<br/>- Model selection<br/>- Success metrics"]
+
+    Build["🔨 BUILD<br/>Development & Training<br/>- Data pipeline<br/>- Model training<br/>- Feature engineering<br/>- API endpoints"]
+
+    Test["✅ TEST<br/>Validation & Quality<br/>- Model accuracy<br/>- Edge cases<br/>- Performance<br/>- Bias detection<br/>- Integration tests"]
+
+    Deploy["🚀 DEPLOY<br/>Production Release<br/>- Model serving<br/>- Canary deployment<br/>- Monitoring<br/>- Feedback loops"]
+
+    Monitor["📊 MONITOR<br/>Continuous Learning<br/>- Model drift detection<br/>- Performance tracking<br/>- Retraining triggers<br/>- User feedback"]
+
+    Plan --> Build
+    Build --> Test
+    Test --> Deploy
+    Deploy --> Monitor
+    Monitor -.->|Continuous Improvement| Plan
+
+    style Plan fill:#667eea,stroke:#667eea,color:#fff
+    style Build fill:#4caf50,stroke:#4caf50,color:#fff
+    style Test fill:#2196f3,stroke:#2196f3,color:#fff
+    style Deploy fill:#ff9800,stroke:#ff9800,color:#fff
+    style Monitor fill:#9c27b0,stroke:#9c27b0,color:#fff
+                        </div>
+                    </div>
+
+                    <h3>📋 Phase 1: Plan</h3>
+                    <button class="collapsible" onclick="toggleCollapsible(this)">What Happens in Planning</button>
+                    <div class="collapsible-content">
+                        <p><strong>Goals:</strong></p>
+                        <ul style="margin-left: 20px; margin-top: 10px;">
+                            <li>Identify business problems AI can solve</li>
+                            <li>Define success metrics (accuracy, latency, cost)</li>
+                            <li>Determine data requirements and sources</li>
+                            <li>Estimate resource needs (compute, storage, budget)</li>
+                        </ul>
+                        <p style="margin-top: 15px;"><strong>Example Use Cases:</strong></p>
+                        <ul style="margin-left: 20px; margin-top: 10px;">
+                            <li><strong>Recommendation Engine:</strong> Predict products users want to buy</li>
+                            <li><strong>Fraud Detection:</strong> Identify suspicious transactions in real-time</li>
+                            <li><strong>Search Ranking:</strong> ML-powered search results instead of keyword matching</li>
+                            <li><strong>Pricing Optimization:</strong> Dynamic pricing based on demand and inventory</li>
+                            <li><strong>Customer Support:</strong> AI chatbot for common questions, escalate complex issues</li>
+                        </ul>
+                        <p style="margin-top: 15px;"><strong>Key Planning Questions:</strong></p>
+                        <ul style="margin-left: 20px; margin-top: 10px;">
+                            <li>What's the business impact if the model is 90% accurate vs 99% accurate?</li>
+                            <li>How much latency can we tolerate? (10ms? 100ms? 1 second?)</li>
+                            <li>What's the cost per prediction? Can we afford it at scale?</li>
+                            <li>What happens if the model makes a bad prediction? How do we recover?</li>
+                        </ul>
+                    </div>
+
+                    <h3>🔨 Phase 2: Build</h3>
+                    <button class="collapsible" onclick="toggleCollapsible(this)">Model Development & Training</button>
+                    <div class="collapsible-content">
+                        <p><strong>Key Components:</strong></p>
+                        <ul style="margin-left: 20px; margin-top: 10px;">
+                            <li><strong>Data Pipeline:</strong> Extract, transform, load data from sources</li>
+                            <li><strong>Feature Engineering:</strong> Create meaningful features from raw data</li>
+                            <li><strong>Model Training:</strong> Train on historical data</li>
+                            <li><strong>Feature Store:</strong> Centralized repo of features for all models</li>
+                            <li><strong>Model Serving:</strong> API endpoints to get predictions</li>
+                        </ul>
+                        <div class="diagram-container" style="margin-top: 15px;">
+                            <div class="mermaid">
+graph TB
+    Raw["Raw Data Sources<br/>- Databases<br/>- APIs<br/>- Logs<br/>- User Events"]
+
+    Pipeline["Data Pipeline<br/>- ETL<br/>- Cleaning<br/>- Transformation"]
+
+    FS["Feature Store<br/>Centralized Features<br/>- user_age<br/>- purchase_history<br/>- browsing_behavior"]
+
+    Training["Model Training<br/>- Supervised Learning<br/>- Feature Selection<br/>- Hyperparameter Tuning"]
+
+    Model["Trained Model<br/>weights & parameters"]
+
+    Serving["Model Serving<br/>REST API<br/>gRPC<br/>Batch Processing"]
+
+    Apps["Applications<br/>- Recommendations<br/>- Search Ranking<br/>- Pricing Engine"]
+
+    Raw --> Pipeline
+    Pipeline --> FS
+    FS --> Training
+    Training --> Model
+    Model --> Serving
+    Serving --> Apps
+
+    style Raw fill:#ffebee,stroke:#f44336
+    style Pipeline fill:#fff3e0,stroke:#ff9800
+    style FS fill:#e3f2fd,stroke:#2196f3
+    style Training fill:#f3e5f5,stroke:#9c27b0
+    style Model fill:#667eea,stroke:#667eea,color:#fff
+    style Serving fill:#4caf50,stroke:#4caf50,color:#fff
+    style Apps fill:#00bcd4,stroke:#00bcd4,color:#fff
+                            </div>
+                        </div>
+                        <p style="margin-top: 15px;"><strong>Feature Store Benefits:</strong></p>
+                        <ul style="margin-left: 20px; margin-top: 10px;">
+                            <li>Reuse features across models (avoid duplication)</li>
+                            <li>Consistent features in training and serving</li>
+                            <li>Real-time feature updates</li>
+                            <li>Easy rollback if features are incorrect</li>
+                        </ul>
+                    </div>
+
+                    <h3>✅ Phase 3: Test</h3>
+                    <button class="collapsible" onclick="toggleCollapsible(this)">Validation & Quality Assurance</button>
+                    <div class="collapsible-content">
+                        <p><strong>Types of Tests:</strong></p>
+                        <table style="margin-top: 15px;">
+                            <tr>
+                                <th>Test Type</th>
+                                <th>What It Checks</th>
+                                <th>Example</th>
+                            </tr>
+                            <tr>
+                                <td><strong>Accuracy Tests</strong></td>
+                                <td>Model makes correct predictions</td>
+                                <td>Precision, Recall, F1-Score > threshold</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Edge Case Tests</strong></td>
+                                <td>Handles unusual inputs</td>
+                                <td>New user, missing data, extreme values</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Latency Tests</strong></td>
+                                <td>Fast enough for production</td>
+                                <td>Prediction < 50ms, batch < 5 minutes</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Bias Tests</strong></td>
+                                <td>Fair across demographics</td>
+                                <td>Accuracy equal for all user groups</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Integration Tests</strong></td>
+                                <td>Works with rest of system</td>
+                                <td>API returns correct format</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Drift Detection</strong></td>
+                                <td>Data hasn't changed dramatically</td>
+                                <td>Data distribution similar to training</td>
+                            </tr>
+                        </table>
+                        <p style="margin-top: 15px;"><strong>Testing Pyramid:</strong></p>
+                        <div class="diagram-container" style="margin-top: 15px;">
+                            <div class="mermaid">
+graph TD
+    A["🏔️ End-to-End Tests<br/>(Full system integration)<br/>1-2 tests"]
+    B["🧪 Integration Tests<br/>(Model + API + DB)<br/>10-20 tests"]
+    C["⚙️ Unit Tests<br/>(Individual components)<br/>100+ tests"]
+
+    C --> B --> A
+
+    style A fill:#ff9800,stroke:#ff9800,color:#fff
+    style B fill:#2196f3,stroke:#2196f3,color:#fff
+    style C fill:#4caf50,stroke:#4caf50,color:#fff
+                            </div>
+                        </div>
+                    </div>
+
+                    <h3>🚀 Phase 4: Deploy</h3>
+                    <button class="collapsible" onclick="toggleCollapsible(this)">Production Release Strategies</button>
+                    <div class="collapsible-content">
+                        <p><strong>Deployment Strategies:</strong></p>
+                        <div class="concept-card">
+                            <strong>1️⃣ Canary Deployment</strong>
+                            <p style="margin-top: 10px;">Route 5% of traffic to new model. If metrics look good after 1 hour, route 25%. After 4 hours, route 100%.</p>
+                            <p style="margin-top: 10px;"><strong>Benefit:</strong> Catch bugs affecting real users before rolling out to everyone.</p>
+                        </div>
+
+                        <div class="concept-card">
+                            <strong>2️⃣ A/B Testing</strong>
+                            <p style="margin-top: 10px;">Show new model to 50% of users, old model to other 50%. Compare results after 1 week.</p>
+                            <p style="margin-top: 10px;"><strong>Benefit:</strong> Measure business impact (revenue, engagement, user satisfaction).</p>
+                        </div>
+
+                        <div class="concept-card">
+                            <strong>3️⃣ Shadow Mode</strong>
+                            <p style="margin-top: 10px;">Run new model alongside old model. Don't show results to users. Compare predictions.</p>
+                            <p style="margin-top: 10px;"><strong>Benefit:</strong> Validate model in production without risk.</p>
+                        </div>
+
+                        <div class="concept-card">
+                            <strong>4️⃣ Blue-Green Deployment</strong>
+                            <p style="margin-top: 10px;">Keep old model running (blue). Deploy new model (green). If new model has issues, switch back to blue instantly.</p>
+                            <p style="margin-top: 10px;"><strong>Benefit:</strong> Zero downtime, instant rollback.</p>
+                        </div>
+                    </div>
+
+                    <h3>📊 Continuous Learning & Monitoring</h3>
+                    <button class="collapsible" onclick="toggleCollapsible(this)">How Models Stay Accurate</button>
+                    <div class="collapsible-content">
+                        <p><strong>The Problem: Model Drift</strong></p>
+                        <p style="margin-top: 10px;">Your model was trained on 2024 data. It's now 2025. User behavior changed. Your competitors changed. The model was 95% accurate, now it's 87% accurate.</p>
+                        <p style="margin-top: 15px;"><strong>The Solution: Continuous Learning Loop</strong></p>
+                        <div class="diagram-container" style="margin-top: 15px;">
+                            <div class="mermaid">
+graph TB
+    Model["Model in Production<br/>Makes predictions"]
+
+    Monitor["Monitor Performance<br/>- Track accuracy<br/>- Watch for drift<br/>- Collect feedback"]
+
+    Data["Collect New Data<br/>- User feedback<br/>- Business outcomes<br/>- Real-world results"]
+
+    Trigger{"Drift<br/>Detected?"}
+
+    Retrain["Retrain Model<br/>With new data"]
+
+    Test["Test New Model<br/>Validate accuracy"]
+
+    Deploy["Deploy New Model<br/>Replace old model"]
+
+    Model --> Monitor
+    Monitor --> Data
+    Data --> Trigger
+    Trigger -->|Yes| Retrain
+    Trigger -->|No| Model
+    Retrain --> Test
+    Test --> Deploy
+    Deploy --> Model
+
+    style Model fill:#4caf50,stroke:#4caf50,color:#fff
+    style Monitor fill:#2196f3,stroke:#2196f3,color:#fff
+    style Data fill:#ff9800,stroke:#ff9800,color:#fff
+    style Trigger fill:#f44336,stroke:#f44336,color:#fff
+    style Retrain fill:#9c27b0,stroke:#9c27b0,color:#fff
+    style Test fill:#00bcd4,stroke:#00bcd4,color:#fff
+    style Deploy fill:#4caf50,stroke:#4caf50,color:#fff
+                            </div>
+                        </div>
+                        <p style="margin-top: 15px;"><strong>Key Metrics to Monitor:</strong></p>
+                        <ul style="margin-left: 20px; margin-top: 10px;">
+                            <li><strong>Model Accuracy:</strong> Still making correct predictions?</li>
+                            <li><strong>Latency:</strong> Serving predictions fast enough?</li>
+                            <li><strong>Data Drift:</strong> Input data distribution changing?</li>
+                            <li><strong>Prediction Drift:</strong> Output distribution changing?</li>
+                            <li><strong>Business Metrics:</strong> Revenue, engagement, user satisfaction impact?</li>
+                            <li><strong>Feedback:</strong> User feedback indicating issues?</li>
+                        </ul>
+                    </div>
+
+                    <h3>AI-Native in Microservices Architecture</h3>
+                    <div class="diagram-container">
+                        <div class="mermaid">
+graph TB
+    Client["Client Applications"]
+    Gateway["API Gateway"]
+
+    Client --> Gateway
+
+    Gateway --> Users["Users Service"]
+    Gateway --> Recs["Recommendations Service<br/>(ML-Powered)<br/>- Feature Store<br/>- Model Serving<br/>- Feedback Loop"]
+    Gateway --> Search["Search Service<br/>(ML-Powered)<br/>- Ranking Model<br/>- Embeddings<br/>- Personalization"]
+    Gateway --> Fraud["Fraud Service<br/>(ML-Powered)<br/>- Real-time Detection<br/>- Pattern Recognition"]
+
+    Users --> UserDB["UserDB"]
+    Recs --> RecsDB["Features DB<br/>+ Models"]
+    Search --> SearchDB["Search Index<br/>+ Models"]
+    Fraud --> FraudDB["Transaction DB<br/>+ Models"]
+
+    Monitor["Monitoring Service<br/>- Model accuracy tracking<br/>- Drift detection<br/>- Retraining triggers"]
+
+    Recs -.-> Monitor
+    Search -.-> Monitor
+    Fraud -.-> Monitor
+
+    style Recs fill:#9c27b0,stroke:#9c27b0,color:#fff
+    style Search fill:#9c27b0,stroke:#9c27b0,color:#fff
+    style Fraud fill:#9c27b0,stroke:#9c27b0,color:#fff
+    style Monitor fill:#ff6f00,stroke:#ff6f00,color:#fff
+                        </div>
+                    </div>
+
+                    <h3>AI-Native Development Best Practices</h3>
+                    <div class="principles-grid">
+                        <div class="principle-box">
+                            <strong>📐 Design for Inference</strong>
+                            Optimize for serving predictions, not just training. Low latency, high throughput.
+                        </div>
+                        <div class="principle-box">
+                            <strong>📊 Instrument Everything</strong>
+                            Log predictions, features, accuracy metrics. Detect drift early.
+                        </div>
+                        <div class="principle-box">
+                            <strong>🔄 Build Feedback Loops</strong>
+                            Collect user feedback, correct predictions, retrain automatically.
+                        </div>
+                        <div class="principle-box">
+                            <strong>⚖️ Monitor for Bias</strong>
+                            Ensure fairness across user groups. Measure accuracy per demographic.
+                        </div>
+                        <div class="principle-box">
+                            <strong>🧪 Test Edge Cases</strong>
+                            New users, missing data, extreme values. Models must handle gracefully.
+                        </div>
+                        <div class="principle-box">
+                            <strong>🎯 Start with Simple Models</strong>
+                            Linear regression beats complex model with mediocre data. Simple is interpretable.
+                        </div>
+                        <div class="principle-box">
+                            <strong>📦 Version Everything</strong>
+                            Data versions, model versions, feature versions. Need to rollback? Easy.
+                        </div>
+                        <div class="principle-box">
+                            <strong>🤝 MLOps as First-Class</strong>
+                            Model serving, monitoring, retraining pipelines are as important as the model itself.
+                        </div>
+                    </div>
+
+                    <h3>Real-World Example: Recommendation Engine</h3>
+                    <button class="collapsible" onclick="toggleCollapsible(this)">From Plan to Deploy</button>
+                    <div class="collapsible-content">
+                        <p><strong>📋 Plan Phase:</strong></p>
+                        <ul style="margin-left: 20px; margin-top: 10px;">
+                            <li>Goal: Recommend products users will click on</li>
+                            <li>Success metric: 20% increase in click-through rate</li>
+                            <li>Data needed: User browsing history, product features, user demographics</li>
+                            <li>Infrastructure: Feature store, real-time serving, monitoring</li>
+                        </ul>
+
+                        <p style="margin-top: 15px;"><strong>🔨 Build Phase:</strong></p>
+                        <ul style="margin-left: 20px; margin-top: 10px;">
+                            <li>Extract features: "user_viewed_products", "product_category_preference", "seasonal_trends"</li>
+                            <li>Train collaborative filtering model on historical user-product interactions</li>
+                            <li>Create model serving endpoint: POST /recommendations with user_id, returns [product_id, confidence_score]</li>
+                            <li>Set up feature store for real-time feature updates</li>
+                        </ul>
+
+                        <p style="margin-top: 15px;"><strong>✅ Test Phase:</strong></p>
+                        <ul style="margin-left: 20px; margin-top: 10px;">
+                            <li>Accuracy: Test on hold-out 20% of data. Need 80%+ accuracy</li>
+                            <li>Latency: P99 latency < 100ms</li>
+                            <li>Bias: Check accuracy is equal across demographics</li>
+                            <li>Integration: API returns correct format, integrates with search results</li>
+                        </ul>
+
+                        <p style="margin-top: 15px;"><strong>🚀 Deploy Phase:</strong></p>
+                        <ul style="margin-left: 20px; margin-top: 10px;">
+                            <li>Day 1: Canary to 5% of users, monitor metrics hourly</li>
+                            <li>Day 2: If metrics good, increase to 25% of users</li>
+                            <li>Day 3: 100% of users receiving recommendations</li>
+                            <li>Week 1-2: A/B test. Track CTR, purchase rate, user engagement</li>
+                        </ul>
+
+                        <p style="margin-top: 15px;"><strong>📊 Monitoring Phase:</strong></p>
+                        <ul style="margin-left: 20px; margin-top: 10px;">
+                            <li>Accuracy drops from 80% to 72%? Retrain with fresh data</li>
+                            <li>Latency increasing? Scale the service, optimize the model</li>
+                            <li>User feedback: "Recommendations are too generic"? Adjust model</li>
+                            <li>Seasonal trends change (e.g., summer vs winter products)? Retrain weekly</li>
+                        </ul>
+                    </div>
+
+                    <h3>Integration with Your Microservices</h3>
+                    <div class="discussion-box">
+                        <h4>How AI Services Fit In</h4>
+                        <ul>
+                            <li>Each AI capability becomes a service (Recommendations, Search Ranking, Fraud Detection)</li>
+                            <li>Services have their own models, feature stores, monitoring</li>
+                            <li>Services communicate via APIs (REST, gRPC)</li>
+                            <li>Centralized monitoring watches for model drift across all services</li>
+                            <li>Retraining can happen independently per service</li>
+                            <li>Failed model deployments only affect one service, not the entire system</li>
+                        </ul>
+                    </div>
+
+                    <h3>Key Takeaways</h3>
+                    <table>
+                        <tr>
+                            <th>Phase</th>
+                            <th>Key Question</th>
+                            <th>Success Criteria</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Plan</strong></td>
+                            <td>What problem are we solving?</td>
+                            <td>Clear metrics, stakeholder buy-in</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Build</strong></td>
+                            <td>Can we train a good model?</td>
+                            <td>Model accuracy > threshold, fast inference</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Test</strong></td>
+                            <td>Does it work in the real world?</td>
+                            <td>Handles edge cases, fair across users, latency acceptable</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Deploy</strong></td>
+                            <td>Is it safe to release?</td>
+                            <td>Canary metrics look good, business metrics positive</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Monitor</strong></td>
+                            <td>Is it staying accurate?</td>
+                            <td>Drift detected early, auto-retraining triggered, no silent failures</td>
+                        </tr>
+                    </table>
+
+                    <h3>Next Steps for Your Team</h3>
+                    <div class="roadmap">
+                        <div class="roadmap-phase">
+                            <strong>🎯 Identify ML Opportunities</strong>
+                            <ul>
+                                <li>What decisions are humans making 1000+ times per day?</li>
+                                <li>What would 5% accuracy improvement be worth?</li>
+                                <li>What data do you already have?</li>
+                            </ul>
+                        </div>
+
+                        <div class="roadmap-phase">
+                            <strong>🏗️ Design AI Service Architecture</strong>
+                            <ul>
+                                <li>How does the ML service fit into your microservices?</li>
+                                <li>What's the feature store strategy?</li>
+                                <li>How do you monitor for model drift?</li>
+                            </ul>
+                        </div>
+
+                        <div class="roadmap-phase">
+                            <strong>🔨 Start with a Pilot</strong>
+                            <ul>
+                                <li>Pick one low-risk ML use case (e.g., recommendations, not fraud)</li>
+                                <li>Follow Plan → Build → Test → Deploy → Monitor</li>
+                                <li>Learn from real-world feedback</li>
+                            </ul>
+                        </div>
+
+                        <div class="roadmap-phase">
+                            <strong>📈 Scale Across Organization</strong>
+                            <ul>
+                                <li>Build reusable feature store</li>
+                                <li>Standardize model serving approach</li>
+                                <li>Create MLOps team to support all services</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div class="footer">
@@ -1175,10 +1633,12 @@ graph LR
         </div>
     </div>
 
-    <script>
-        mermaid.initialize({ startOnLoad: true, theme: 'default' });
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
 
-        function openTab(evt, tabName) {
+        mermaid.initialize({ startOnLoad: true, theme: 'default', securityLevel: 'loose' });
+
+        window.openTab = function(evt, tabName) {
             // Hide all tab contents
             const tabContents = document.querySelectorAll('.tab-content');
             tabContents.forEach(content => {
@@ -1195,15 +1655,20 @@ graph LR
             document.getElementById(tabName).classList.add('active');
             evt.currentTarget.classList.add('active');
 
-            // Re-render mermaid diagrams
-            mermaid.contentLoaded();
-        }
+            // Re-render mermaid diagrams with a small delay
+            setTimeout(() => {
+                mermaid.run();
+            }, 100);
+        };
 
-        function toggleCollapsible(button) {
+        window.toggleCollapsible = function(button) {
             button.classList.toggle('active');
             const content = button.nextElementSibling;
             content.classList.toggle('active');
-        }
+        };
+
+        // Initial render
+        mermaid.run();
     </script>
 </body>
 </html>
