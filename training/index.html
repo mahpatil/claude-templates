@@ -1,0 +1,1209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cloud-Native & Microservices Training</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #eee;
+        }
+
+        .tab-btn {
+            padding: 12px 24px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1em;
+            color: #666;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .tab-btn:hover {
+            color: #667eea;
+        }
+
+        .tab-btn.active {
+            color: #667eea;
+            border-bottom-color: #667eea;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .module-section {
+            margin-bottom: 40px;
+        }
+
+        .module-section h2 {
+            font-size: 2em;
+            color: #667eea;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .module-section h3 {
+            font-size: 1.4em;
+            color: #333;
+            margin: 30px 0 15px 0;
+        }
+
+        .story-block {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 25px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 5px solid #667eea;
+        }
+
+        .story-year {
+            font-weight: bold;
+            color: #667eea;
+            font-size: 1.1em;
+            margin-bottom: 8px;
+        }
+
+        .diagram-container {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 25px 0;
+            overflow-x: auto;
+        }
+
+        .mermaid {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .problem-solution {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .problem-card, .solution-card {
+            padding: 25px;
+            border-radius: 8px;
+            border-left: 5px solid;
+        }
+
+        .problem-card {
+            background: #ffebee;
+            border-left-color: #f44336;
+        }
+
+        .solution-card {
+            background: #e8f5e9;
+            border-left-color: #4caf50;
+        }
+
+        .problem-card h4, .solution-card h4 {
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .problem-card h4 {
+            color: #c62828;
+        }
+
+        .solution-card h4 {
+            color: #2e7d32;
+        }
+
+        .problem-card ul, .solution-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .problem-card li, .solution-card li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .problem-card li:before {
+            content: "❌";
+            position: absolute;
+            left: 0;
+        }
+
+        .solution-card li:before {
+            content: "✅";
+            position: absolute;
+            left: 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background: #667eea;
+            color: white;
+            font-weight: 600;
+        }
+
+        tr:hover {
+            background: #f5f5f5;
+        }
+
+        .collapsible {
+            background: #f0f2f5;
+            color: #333;
+            cursor: pointer;
+            padding: 15px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 1em;
+            font-weight: 600;
+            border-radius: 5px;
+            margin: 15px 0;
+            transition: all 0.3s ease;
+            border-left: 4px solid #667eea;
+        }
+
+        .collapsible:hover {
+            background: #e0e2e7;
+        }
+
+        .collapsible.active {
+            background: #667eea;
+            color: white;
+            border-left-color: #764ba2;
+        }
+
+        .collapsible-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            background: #fafafa;
+            padding: 0 15px;
+        }
+
+        .collapsible-content.active {
+            max-height: 1000px;
+            padding: 15px;
+        }
+
+        .discussion-box {
+            background: #e3f2fd;
+            padding: 25px;
+            border-radius: 8px;
+            border-left: 5px solid #2196f3;
+            margin: 25px 0;
+        }
+
+        .discussion-box h4 {
+            color: #1976d2;
+            margin-bottom: 15px;
+        }
+
+        .discussion-box ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .discussion-box li {
+            padding: 10px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .discussion-box li:before {
+            content: "❓";
+            position: absolute;
+            left: 0;
+        }
+
+        .concept-card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 25px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 5px solid #667eea;
+        }
+
+        .concept-card strong {
+            color: #667eea;
+            font-size: 1.1em;
+        }
+
+        .timeline {
+            position: relative;
+            padding: 20px 0;
+        }
+
+        .timeline-item {
+            padding-left: 40px;
+            padding-bottom: 30px;
+            position: relative;
+        }
+
+        .timeline-item:before {
+            content: "";
+            position: absolute;
+            left: 10px;
+            top: 0;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #667eea;
+        }
+
+        .timeline-item:after {
+            content: "";
+            position: absolute;
+            left: 19px;
+            top: 20px;
+            bottom: -30px;
+            width: 2px;
+            background: #ddd;
+        }
+
+        .timeline-item:last-child:after {
+            display: none;
+        }
+
+        .timeline-item strong {
+            color: #667eea;
+            font-size: 1.1em;
+        }
+
+        .principles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .principle-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .principle-box strong {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .roadmap {
+            background: #f9f9f9;
+            padding: 25px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .roadmap-phase {
+            margin: 20px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 5px;
+            border-left: 4px solid #667eea;
+        }
+
+        .roadmap-phase strong {
+            color: #667eea;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .roadmap-phase ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .roadmap-phase li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .roadmap-phase li:before {
+            content: "☐";
+            position: absolute;
+            left: 0;
+        }
+
+        .footer {
+            background: #f5f5f5;
+            padding: 30px 40px;
+            text-align: center;
+            color: #666;
+            border-top: 1px solid #eee;
+        }
+
+        @media (max-width: 768px) {
+            .problem-solution {
+                grid-template-columns: 1fr;
+            }
+
+            header h1 {
+                font-size: 1.8em;
+            }
+
+            .principles-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>☁️ Cloud-Native & Microservices</h1>
+            <p>Comprehensive Training Guide for Teams New to Distributed Architecture</p>
+        </header>
+
+        <div class="content">
+            <!-- Tab Navigation -->
+            <div class="tabs">
+                <button class="tab-btn active" onclick="openTab(event, 'module1')">📖 The Journey</button>
+                <button class="tab-btn" onclick="openTab(event, 'module2')">🏗️ Monolith Pain</button>
+                <button class="tab-btn" onclick="openTab(event, 'module3')">🚀 Microservices</button>
+                <button class="tab-btn" onclick="openTab(event, 'module4')">🎯 DDD Concepts</button>
+                <button class="tab-btn" onclick="openTab(event, 'module5')">🔄 Problem-Solution</button>
+                <button class="tab-btn" onclick="openTab(event, 'module6')">📚 Principles</button>
+                <button class="tab-btn" onclick="openTab(event, 'module7')">🗺️ Roadmap</button>
+            </div>
+
+            <!-- Module 1: The Journey -->
+            <div id="module1" class="tab-content active">
+                <div class="module-section">
+                    <h2>📖 The Journey: Why We're Here</h2>
+
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <strong>2010: The Beginning</strong>
+                            <p>Your company launches a successful web application. A single codebase handles everything. Your team is 5 developers. Deployments are simple. Everyone understands the whole system.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <strong>2015: Growing Pains</strong>
+                            <p>Business is booming with 20 developers. Merging code is painful. A typo in the payment module crashed the entire system. Scaling for the holiday season requires re-testing everything.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <strong>2020: Crisis Point</strong>
+                            <p>Now you have 50 developers across 8 teams. A single deployment takes 3 months to coordinate. New developers take weeks to understand the codebase. A bug in notifications brings down everything.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <strong>2024: Time to Change</strong>
+                            <p>You're losing market share. Cloud bills are 3x higher than necessary. Your best engineers are leaving. <strong>This is the monolith crisis.</strong></p>
+                        </div>
+                    </div>
+
+                    <h3>Why Microservices?</h3>
+                    <div class="concept-card">
+                        <p>The challenges of growing organizations with monolithic systems led to a fundamental shift in how we build software. Microservices aren't just about technology—they're about enabling team independence, faster deployment cycles, and efficient resource utilization.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Module 2: Monolith Pain Points -->
+            <div id="module2" class="tab-content">
+                <div class="module-section">
+                    <h2>🏗️ The Monolithic Architecture</h2>
+
+                    <h3>Visual: The Monolith Structure</h3>
+                    <div class="diagram-container">
+                        <div class="mermaid">
+graph TB
+    subgraph Monolith["MONOLITHIC APPLICATION"]
+        subgraph Code["Single Codebase"]
+            Users["Users Module"]
+            Orders["Orders Module"]
+            Payments["Payments Module"]
+            Inventory["Inventory Module"]
+        end
+        DB["Single Database<br/>(All modules share)"]
+        Users --> DB
+        Orders --> DB
+        Payments --> DB
+        Inventory --> DB
+    end
+
+    style Monolith fill:#ffebee,stroke:#f44336,stroke-width:2px
+    style Code fill:#fff,stroke:#f44336,stroke-width:2px
+    style DB fill:#ffcdd2,stroke:#f44336,stroke-width:2px
+    style Users fill:#fff,stroke:#999
+    style Orders fill:#fff,stroke:#999
+    style Payments fill:#fff,stroke:#999
+    style Inventory fill:#fff,stroke:#999
+                        </div>
+                    </div>
+
+                    <h3>The Real Pain Points</h3>
+
+                    <button class="collapsible" onclick="toggleCollapsible(this)">🔗 Problem 1: Tight Coupling</button>
+                    <div class="collapsible-content">
+                        <p><strong>Scenario:</strong> User Service changes user ID format from integer to UUID.</p>
+                        <p style="margin-top: 15px;"><strong>Impact:</strong> Orders Service breaks. Payments Service breaks. Inventory Service breaks. You have to coordinate changes across 4 services to deploy 1 feature.</p>
+                        <p style="margin-top: 15px;"><strong>Result:</strong> Single change requires coordinating multiple teams. Risk explodes exponentially.</p>
+                    </div>
+
+                    <button class="collapsible" onclick="toggleCollapsible(this)">📈 Problem 2: Inefficient Scaling</button>
+                    <div class="collapsible-content">
+                        <p><strong>Scenario:</strong> Black Friday. Orders traffic quadruples. System gets slow.</p>
+                        <div class="problem-solution">
+                            <div class="problem-card">
+                                <h4>Monolith Scaling</h4>
+                                <ul>
+                                    <li>Scale entire application by 4x</li>
+                                    <li>Users gets 4x (only 10% more traffic)</li>
+                                    <li>Orders gets 4x (25% more traffic)</li>
+                                    <li>Payments gets 4x (15% more traffic)</li>
+                                    <li>Inventory gets 4x (20% more traffic)</li>
+                                </ul>
+                            </div>
+                            <div class="solution-card">
+                                <h4>Efficient Scaling Impact</h4>
+                                <ul>
+                                    <li>75% capacity wasted</li>
+                                    <li>4x cloud costs</li>
+                                    <li>Over-provisioned systems</li>
+                                    <li>Slower performance per dollar</li>
+                                    <li>Budget overruns</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="collapsible" onclick="toggleCollapsible(this)">🐢 Problem 3: Slow Releases</button>
+                    <div class="collapsible-content">
+                        <table>
+                            <tr>
+                                <th>Stage</th>
+                                <th>Duration</th>
+                            </tr>
+                            <tr>
+                                <td>Develop locally</td>
+                                <td>3 days</td>
+                            </tr>
+                            <tr>
+                                <td>Code review (waiting for other teams)</td>
+                                <td>2 days</td>
+                            </tr>
+                            <tr>
+                                <td>Resolve merge conflicts</td>
+                                <td>1 day</td>
+                            </tr>
+                            <tr>
+                                <td>Full system testing</td>
+                                <td>2 days</td>
+                            </tr>
+                            <tr>
+                                <td>Staging validation</td>
+                                <td>1 day</td>
+                            </tr>
+                            <tr>
+                                <td>Security review</td>
+                                <td>2 days</td>
+                            </tr>
+                            <tr>
+                                <td>Wait for deployment window</td>
+                                <td>1 week</td>
+                            </tr>
+                            <tr style="background: #ffebee;">
+                                <td><strong>Total Time</strong></td>
+                                <td><strong>3+ weeks for a 1-day feature</strong></td>
+                            </tr>
+                        </table>
+                        <p><strong>Impact:</strong> Competitors release 10 features while you release 1.</p>
+                    </div>
+
+                    <button class="collapsible" onclick="toggleCollapsible(this)">🔒 Problem 4: Technology Lock-In</button>
+                    <div class="collapsible-content">
+                        <p><strong>Scenario:</strong> You chose Node.js in 2015. It's 2024. New feature needs Python's ML libraries or Go's performance.</p>
+                        <p style="margin-top: 15px;"><strong>Your options:</strong></p>
+                        <ul style="margin-left: 20px; margin-top: 10px;">
+                            <li>Rewrite everything (2 years, $2M)</li>
+                            <li>Hack Node.js into something it wasn't designed for (technical debt)</li>
+                            <li>Stay stuck (lose market advantage)</li>
+                        </ul>
+                        <p style="margin-top: 15px;"><strong>Impact:</strong> Can't adopt better tools. Trapped by history.</p>
+                    </div>
+
+                    <button class="collapsible" onclick="toggleCollapsible(this)">👥 Problem 5: Team Scaling</button>
+                    <div class="collapsible-content">
+                        <p><strong>New developer onboarding timeline:</strong></p>
+                        <ul style="margin-left: 20px; margin-top: 10px;">
+                            <li><strong>Week 1-2:</strong> Understanding the entire codebase</li>
+                            <li><strong>Week 3:</strong> Understanding how to make safe changes</li>
+                            <li><strong>Week 4+:</strong> Actually productive</li>
+                        </ul>
+                        <p style="margin-top: 15px;"><strong>Impact:</strong> Each new hire takes 4 weeks. Slow team growth. Minimal productivity gains from scaling.</p>
+                    </div>
+
+                    <button class="collapsible" onclick="toggleCollapsible(this)">💥 Problem 6: Deployment Risk</button>
+                    <div class="collapsible-content">
+                        <p><strong>Scenario:</strong> One typo crashes the entire system.</p>
+                        <p style="margin-top: 15px;"><strong>Example:</strong></p>
+                        <pre style="background: #f5f5f5; padding: 15px; border-radius: 5px; margin-top: 10px;">if (user.isActive === false) {  // Bug
+  deleteUserAccount();  // Deletes ALL active users
+}</pre>
+                        <p style="margin-top: 15px;"><strong>Blast radius:</strong> ENTIRE SYSTEM DOWN. All services affected. All users impacted.</p>
+                        <p style="margin-top: 10px;"><strong>Recovery:</strong> 30 minutes of downtime. Lost revenue. Customer trust damaged.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Module 3: Microservices -->
+            <div id="module3" class="tab-content">
+                <div class="module-section">
+                    <h2>🚀 Cloud-Native Microservices</h2>
+
+                    <h3>Core Architecture</h3>
+                    <div class="diagram-container">
+                        <div class="mermaid">
+graph TB
+    Client["Client Applications"]
+    Gateway["API Gateway<br/>(Entry Point)"]
+
+    Client --> Gateway
+
+    Gateway --> Users["Users Service<br/>(Node.js)"]
+    Gateway --> Orders["Orders Service<br/>(Go)"]
+    Gateway --> Payments["Payments Service<br/>(Rust)"]
+    Gateway --> Inventory["Inventory Service<br/>(Python)"]
+
+    Users --> UserDB["UserDB"]
+    Orders --> OrderDB["OrderDB"]
+    Payments --> PaymentDB["PaymentDB"]
+    Inventory --> InventoryDB["InventoryDB"]
+
+    Users -.->|Events| Broker["Message Broker<br/>(RabbitMQ/Kafka)"]
+    Orders -.->|Events| Broker
+    Payments -.->|Events| Broker
+    Inventory -.->|Events| Broker
+
+    style Gateway fill:#667eea,stroke:#667eea,color:#fff
+    style Users fill:#4caf50,stroke:#4caf50,color:#fff
+    style Orders fill:#4caf50,stroke:#4caf50,color:#fff
+    style Payments fill:#4caf50,stroke:#4caf50,color:#fff
+    style Inventory fill:#4caf50,stroke:#4caf50,color:#fff
+    style UserDB fill:#2196f3,stroke:#2196f3,color:#fff
+    style OrderDB fill:#2196f3,stroke:#2196f3,color:#fff
+    style PaymentDB fill:#2196f3,stroke:#2196f3,color:#fff
+    style InventoryDB fill:#2196f3,stroke:#2196f3,color:#fff
+    style Broker fill:#ff9800,stroke:#ff9800,color:#fff
+                        </div>
+                    </div>
+
+                    <h3>Key Principles</h3>
+
+                    <div class="concept-card">
+                        <strong>1️⃣ Single Responsibility</strong>
+                        <p style="margin-top: 10px;">Each microservice handles one business capability. The Orders Service handles orders. Only orders. Not payments, not inventory, not users.</p>
+                    </div>
+
+                    <div class="concept-card">
+                        <strong>2️⃣ Independent Deployment</strong>
+                        <p style="margin-top: 10px;">Deploy one service without touching others. Team A ships Orders Service. Team B ships Payments Service. One failure doesn't block the other.</p>
+                    </div>
+
+                    <div class="concept-card">
+                        <strong>3️⃣ Technology Autonomy</strong>
+                        <p style="margin-top: 10px;">Use the right tool for each service. High-throughput order processing in Go. Rapid development in Python. Strict correctness in Rust.</p>
+                    </div>
+
+                    <div class="concept-card">
+                        <strong>4️⃣ Scalability - Scale What Matters</strong>
+                        <p style="margin-top: 10px;">Scale only services that need it. Orders bottleneck on Black Friday? Scale just Orders. Users, Payments, Inventory stay at normal capacity.</p>
+                    </div>
+
+                    <div class="concept-card">
+                        <strong>5️⃣ Fault Isolation</strong>
+                        <p style="margin-top: 10px;">One service crashes. Others keep working. Notifications down? Users can still log in, place orders, pay. Graceful degradation.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Module 4: DDD Concepts -->
+            <div id="module4" class="tab-content">
+                <div class="module-section">
+                    <h2>🎯 Domain-Driven Design</h2>
+
+                    <h3>The Problem DDD Solves</h3>
+                    <div style="background: #fff3e0; padding: 20px; border-radius: 8px; border-left: 5px solid #ff9800; margin: 20px 0;">
+                        <p>If microservices are just "split the monolith randomly," you create new problems: unclear boundaries, shared databases, services tightly coupled to each other.</p>
+                    </div>
+
+                    <h3>Key Concept: Bounded Context</h3>
+                    <div class="diagram-container">
+                        <div class="mermaid">
+graph TB
+    subgraph OrdersContext["ORDERS BOUNDED CONTEXT"]
+        OE["Entities:<br/>- Order (lifecycle)<br/>- LineItem"]
+        OV["Value Objects:<br/>- OrderStatus<br/>- ShippingAddress"]
+        OR["Rules:<br/>- Can't cancel fulfilled<br/>- Max 1000 items<br/>- Need payment first"]
+        ODB["Database<br/>(Only this context)"]
+    end
+
+    subgraph PaymentsContext["PAYMENTS BOUNDED CONTEXT"]
+        PE["Entities:<br/>- Transaction<br/>- PaymentMethod"]
+        PV["Value Objects:<br/>- Money<br/>- TransactionStatus"]
+        PR["Rules:<br/>- Max $100k per tx<br/>- Refund within 90d"]
+        PDB["Database<br/>(Only this context)"]
+    end
+
+    API["API Contract<br/>(REST/Events)"]
+    OrdersContext --> API
+    API --> PaymentsContext
+
+    style OrdersContext fill:#e8f5e9,stroke:#4caf50,stroke-width:2px
+    style PaymentsContext fill:#e3f2fd,stroke:#2196f3,stroke-width:2px
+    style API fill:#fff9c4,stroke:#fbc02d,stroke-width:2px
+                        </div>
+                    </div>
+
+                    <h3>Core Concepts</h3>
+
+                    <button class="collapsible" onclick="toggleCollapsible(this)">📝 Ubiquitous Language</button>
+                    <div class="collapsible-content">
+                        <p>Shared vocabulary that appears everywhere: code, documentation, conversations.</p>
+                        <p style="margin-top: 15px;"><strong>Orders Context:</strong></p>
+                        <ul style="margin-left: 20px; margin-top: 10px;">
+                            <li>"Submit Order" (not "Create OrderRecord")</li>
+                            <li>"Fulfill Order" (not "Update Status = 'shipped'")</li>
+                            <li>"Cancel Order" (not "Set Active = false")</li>
+                        </ul>
+                        <p style="margin-top: 15px;"><strong>Payments Context:</strong></p>
+                        <ul style="margin-left: 20px; margin-top: 10px;">
+                            <li>"Authorize Payment" (not "CheckCard")</li>
+                            <li>"Capture Payment" (not "ChargeCard")</li>
+                            <li>"Issue Refund" (not "ReverseTransaction")</li>
+                        </ul>
+                    </div>
+
+                    <button class="collapsible" onclick="toggleCollapsible(this)">🏛️ Entities vs Value Objects</button>
+                    <div class="collapsible-content">
+                        <div class="problem-solution">
+                            <div class="problem-card" style="background: #e3f2fd; border-left-color: #2196f3;">
+                                <h4 style="color: #1976d2;">Entity</h4>
+                                <p><strong>Has identity and lifecycle</strong></p>
+                                <p style="margin-top: 10px;">Order #12345:</p>
+                                <ul style="margin-left: 20px; margin-top: 5px;">
+                                    <li>Unique identity (12345)</li>
+                                    <li>Lifecycle (pending → fulfilled)</li>
+                                    <li>Changes over time</li>
+                                    <li>We track its history</li>
+                                </ul>
+                            </div>
+                            <div class="solution-card" style="background: #f3e5f5; border-left-color: #9c27b0;">
+                                <h4 style="color: #6a1b9a;">Value Object</h4>
+                                <p><strong>No identity, just values</strong></p>
+                                <p style="margin-top: 10px;">ShippingAddress:</p>
+                                <ul style="margin-left: 20px; margin-top: 5px;">
+                                    <li>No identity</li>
+                                    <li>Immutable</li>
+                                    <li>Defined by values</li>
+                                    <li>123 Main St, SF, CA</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="collapsible" onclick="toggleCollapsible(this)">📦 Aggregates</button>
+                    <div class="collapsible-content">
+                        <p>A cluster of entities and value objects treated as one unit.</p>
+                        <div class="diagram-container" style="margin-top: 15px;">
+                            <div class="mermaid">
+graph TB
+    Order["<b>Order</b><br/>(Aggregate Root)<br/>ID: 12345<br/>Status: Pending"]
+
+    Order --> LI1["LineItem 1<br/>Product: Widget A<br/>Qty: 2<br/>Price: $19.99"]
+    Order --> LI2["LineItem 2<br/>Product: Widget B<br/>Qty: 1<br/>Price: $29.99"]
+    Order --> SA["ShippingAddress<br/>123 Main St<br/>SF, CA"]
+    Order --> OT["OrderTotal<br/>Subtotal: $69.97<br/>Tax: $5.60<br/>Total: $75.57"]
+
+    style Order fill:#667eea,stroke:#667eea,color:#fff
+    style LI1 fill:#4caf50,stroke:#4caf50,color:#fff
+    style LI2 fill:#4caf50,stroke:#4caf50,color:#fff
+    style SA fill:#ff9800,stroke:#ff9800,color:#fff
+    style OT fill:#ff9800,stroke:#ff9800,color:#fff
+                            </div>
+                        </div>
+                        <p style="margin-top: 15px;"><strong>Why?</strong> Simplifies data management. Order knows how to update itself correctly. Prevents inconsistent states.</p>
+                    </div>
+
+                    <button class="collapsible" onclick="toggleCollapsible(this)">🗄️ Repositories</button>
+                    <div class="collapsible-content">
+                        <p><strong>Hide complexity of data access.</strong> Your code doesn't know where data lives.</p>
+                        <p style="margin-top: 15px;"><strong>Before (Tight Coupling):</strong></p>
+                        <pre style="background: #f5f5f5; padding: 15px; border-radius: 5px; margin-top: 10px;">const order = db.query("SELECT * FROM orders WHERE id = 123");
+order.status = "fulfilled";
+db.update("UPDATE orders SET status...");</pre>
+                        <p style="margin-top: 15px;"><strong>After (Repository Pattern):</strong></p>
+                        <pre style="background: #f5f5f5; padding: 15px; border-radius: 5px; margin-top: 10px;">const order = orderRepository.getById(123);
+order.fulfill();
+orderRepository.save(order);</pre>
+                        <p style="margin-top: 15px;"><strong>Benefits:</strong> Implementation detail hidden (SQL, NoSQL, API—code doesn't care), easy to test (mock repository), easy to change.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Module 5: Problem-Solution Patterns -->
+            <div id="module5" class="tab-content">
+                <div class="module-section">
+                    <h2>🔄 Problem-Solution Patterns</h2>
+
+                    <h3>Problem #1: Multiple Teams, One Codebase</h3>
+                    <div class="problem-solution">
+                        <div class="problem-card">
+                            <h4>Monolith Reality</h4>
+                            <ul>
+                                <li>5 teams merge conflicts on main branch</li>
+                                <li>3-week code review wait</li>
+                                <li>45-minute full system test</li>
+                                <li>Monthly deployment window</li>
+                                <li>One bug blocks all teams</li>
+                            </ul>
+                            <p style="margin-top: 15px;"><strong>Time to deploy: 3+ weeks</strong></p>
+                        </div>
+                        <div class="solution-card">
+                            <h4>Microservices Solution</h4>
+                            <ul>
+                                <li>Each team owns their service repo</li>
+                                <li>1-hour code review (teammates only)</li>
+                                <li>5-minute test suite (single service)</li>
+                                <li>Deploy multiple times daily</li>
+                                <li>One team's bug doesn't block others</li>
+                            </ul>
+                            <p style="margin-top: 15px;"><strong>Time to deploy: 2-3 hours</strong></p>
+                        </div>
+                    </div>
+
+                    <h3>Problem #2: Scaling Bottlenecks</h3>
+                    <div class="diagram-container">
+                        <div class="mermaid">
+graph LR
+    subgraph Normal["Normal Day"]
+        NU["Users<br/>500 req/s"]
+        NO["Orders<br/>200 req/s"]
+        NP["Payments<br/>150 req/s"]
+        NI["Inventory<br/>300 req/s"]
+    end
+
+    subgraph Monolith["Monolith Scaling<br/>(10x traffic)"]
+        MU["Users × 10<br/>Wasted capacity"]
+        MO["Orders × 10<br/>25% utilized"]
+        MP["Payments × 10<br/>15% utilized"]
+        MI["Inventory × 10<br/>20% utilized"]
+    end
+
+    subgraph Micro["Microservices Scaling<br/>(Smart scaling)"]
+        MiU["Users × 5<br/>Fully utilized"]
+        MiO["Orders × 10<br/>Fully utilized"]
+        MiP["Payments × 3<br/>Fully utilized"]
+        MiI["Inventory × 2<br/>Fully utilized"]
+    end
+
+    Normal -->|Inefficient| Monolith
+    Normal -->|Efficient| Micro
+
+    style Monolith fill:#ffebee,stroke:#f44336
+    style Micro fill:#e8f5e9,stroke:#4caf50
+                        </div>
+                    </div>
+                    <p style="text-align: center; margin-top: 20px;"><strong>Result: Monolith wastes 60% capacity. Microservices wastes 15%.</strong></p>
+
+                    <h3>Problem #3: Technology Evolution</h3>
+                    <div class="problem-solution">
+                        <div class="problem-card">
+                            <h4>Monolith: Stuck</h4>
+                            <ul>
+                                <li>2015: Choose Node.js</li>
+                                <li>2020: Want Rust for speed</li>
+                                <li>2024: Codebase is JavaScript</li>
+                                <li>Can't change without rewrite</li>
+                                <li>Lose competitive advantage</li>
+                            </ul>
+                        </div>
+                        <div class="solution-card">
+                            <h4>Microservices: Evolve</h4>
+                            <ul>
+                                <li>2015: Core services in Node.js</li>
+                                <li>2020: New services in Rust</li>
+                                <li>2023: Data pipeline in Go</li>
+                                <li>2024: ML service in Python</li>
+                                <li>Use best tool for each job</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <h3>Problem #4: Feature Development Speed</h3>
+                    <table>
+                        <tr>
+                            <th>Step</th>
+                            <th>Monolith</th>
+                            <th>Microservices</th>
+                        </tr>
+                        <tr>
+                            <td>Development</td>
+                            <td>3 days</td>
+                            <td>3 days</td>
+                        </tr>
+                        <tr>
+                            <td>Code Review</td>
+                            <td>3+ days</td>
+                            <td>1 hour</td>
+                        </tr>
+                        <tr>
+                            <td>Testing</td>
+                            <td>45 minutes</td>
+                            <td>5 minutes</td>
+                        </tr>
+                        <tr>
+                            <td>Merge/Deploy</td>
+                            <td>1 day</td>
+                            <td>10 minutes</td>
+                        </tr>
+                        <tr>
+                            <td>Approval</td>
+                            <td>1+ week</td>
+                            <td>20 minutes</td>
+                        </tr>
+                        <tr style="background: linear-gradient(90deg, #ffebee, #e8f5e9);">
+                            <td><strong>Total Time</strong></td>
+                            <td><strong>2+ weeks</strong></td>
+                            <td><strong>3.5 hours</strong></td>
+                        </tr>
+                    </table>
+                    <p style="text-align: center; margin-top: 20px; color: #2e7d32; font-weight: bold;">Microservices: 30-50x faster</p>
+                </div>
+            </div>
+
+            <!-- Module 6: Cloud-Native Principles -->
+            <div id="module6" class="tab-content">
+                <div class="module-section">
+                    <h2>📚 Cloud-Native Core Principles</h2>
+
+                    <div class="principles-grid">
+                        <div class="principle-box">
+                            <strong>1. Composable Architecture & DDD</strong>
+                            Design services around business domains, not technical layers.
+                        </div>
+                        <div class="principle-box">
+                            <strong>2. API-First & Contract-Driven</strong>
+                            Clear contracts between services. APIs enable independence.
+                        </div>
+                        <div class="principle-box">
+                            <strong>3. Cloud Portability</strong>
+                            Avoid vendor lock-in. Use open standards. Portable everywhere.
+                        </div>
+                        <div class="principle-box">
+                            <strong>4. Observability</strong>
+                            Logs, metrics, traces are first-class citizens.
+                        </div>
+                        <div class="principle-box">
+                            <strong>5. Zero Trust Security</strong>
+                            Authenticate & authorize everything, everywhere.
+                        </div>
+                        <div class="principle-box">
+                            <strong>6. Performance Optimization</strong>
+                            Measure first. Optimize where it matters.
+                        </div>
+                        <div class="principle-box">
+                            <strong>7. High Availability</strong>
+                            Redundancy, failover, graceful degradation.
+                        </div>
+                        <div class="principle-box">
+                            <strong>8. Reliability & Resilience</strong>
+                            Handle failures gracefully. Chaos engineering.
+                        </div>
+                        <div class="principle-box">
+                            <strong>9. Cost Optimization</strong>
+                            Right-size resources. Auto-scale intelligently.
+                        </div>
+                        <div class="principle-box">
+                            <strong>10. Automation First</strong>
+                            CI/CD, automated testing, security scanning.
+                        </div>
+                        <div class="principle-box">
+                            <strong>11. Infrastructure as Code</strong>
+                            Version-controlled, reproducible infrastructure.
+                        </div>
+                        <div class="principle-box">
+                            <strong>12. Open Source & Open Standards</strong>
+                            Kubernetes, PostgreSQL, OpenTelemetry, OAuth2.
+                        </div>
+                    </div>
+
+                    <h3>Core Engineering Tenets</h3>
+                    <table>
+                        <tr>
+                            <th>Tenet</th>
+                            <th>Meaning</th>
+                            <th>Example</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Clarity over cleverness</strong></td>
+                            <td>Write obvious code, not clever code</td>
+                            <td>Explicit validation instead of clever tricks</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Small, safe changes</strong></td>
+                            <td>Ship small, testable changes frequently</td>
+                            <td>1 feature per PR, not 50 features</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Separation of concerns</strong></td>
+                            <td>Each component does one thing</td>
+                            <td>Orders Service ≠ Payments Service</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Defensive boundaries</strong></td>
+                            <td>Validate at edges, trust internal code</td>
+                            <td>API validates requests, internal code trusts data</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Observability-first</strong></td>
+                            <td>Logs, metrics, traces built-in</td>
+                            <td>Every service logs decisions and metrics</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Data-driven decisions</strong></td>
+                            <td>Metrics over opinions</td>
+                            <td>"This is slow" → measure and find bottleneck</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Quality built-in</strong></td>
+                            <td>Not added later</td>
+                            <td>Tests and security scans in CI/CD</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Continuous learning</strong></td>
+                            <td>Retrospectives and evolution</td>
+                            <td>Post-mortems ask "what can we learn?"</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Module 7: Implementation Roadmap -->
+            <div id="module7" class="tab-content">
+                <div class="module-section">
+                    <h2>🗺️ Your Implementation Roadmap</h2>
+
+                    <div class="roadmap">
+                        <div class="roadmap-phase">
+                            <strong>📚 Week 1-2: Foundation</strong>
+                            <ul>
+                                <li>Read this training plan</li>
+                                <li>Watch: Domain-Driven Design fundamentals (3 hours)</li>
+                                <li>Watch: Microservices patterns (3 hours)</li>
+                                <li>Hands-on: Deploy a containerized application locally</li>
+                            </ul>
+                        </div>
+
+                        <div class="roadmap-phase">
+                            <strong>🎯 Week 3-4: Domain Mapping</strong>
+                            <ul>
+                                <li>Run event storming workshop with stakeholders</li>
+                                <li>Map current system to bounded contexts</li>
+                                <li>Identify service boundaries using DDD</li>
+                                <li>Document aggregate models</li>
+                            </ul>
+                        </div>
+
+                        <div class="roadmap-phase">
+                            <strong>🏗️ Week 5-6: Architecture Design</strong>
+                            <ul>
+                                <li>Design service APIs and contracts</li>
+                                <li>Plan data ownership (who owns which database)</li>
+                                <li>Design inter-service communication</li>
+                                <li>Plan deployment strategy</li>
+                            </ul>
+                        </div>
+
+                        <div class="roadmap-phase">
+                            <strong>✈️ Week 7-10: Extract First Service</strong>
+                            <ul>
+                                <li>Choose non-critical service to extract (e.g., Notifications)</li>
+                                <li>Create dedicated repo and pipeline</li>
+                                <li>Implement as cloud-native application</li>
+                                <li>Deploy to production with feature flag</li>
+                                <li>Monitor and iterate</li>
+                            </ul>
+                        </div>
+
+                        <div class="roadmap-phase">
+                            <strong>📈 Week 11+: Scale</strong>
+                            <ul>
+                                <li>Extract next 2-3 services</li>
+                                <li>Implement observability (logs, metrics, traces)</li>
+                                <li>Build deployment automation</li>
+                                <li>Establish on-call rotations</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <h3>Team Discussion Questions</h3>
+
+                    <div class="discussion-box">
+                        <h4>On Current Pain Points</h4>
+                        <ul>
+                            <li>What are the top 3 pain points with our current system?</li>
+                            <li>If we could fix one thing, what would have the biggest impact?</li>
+                            <li>Which teams feel most blocked or independent?</li>
+                        </ul>
+                    </div>
+
+                    <div class="discussion-box">
+                        <h4>On Service Boundaries</h4>
+                        <ul>
+                            <li>What are the core business capabilities of our system?</li>
+                            <li>Where do terminology and ownership currently clash?</li>
+                            <li>Which services could scale independently?</li>
+                        </ul>
+                    </div>
+
+                    <div class="discussion-box">
+                        <h4>On Cloud-Native Goals</h4>
+                        <ul>
+                            <li>How often would we like to deploy? (weekly? daily?)</li>
+                            <li>What are our biggest cloud cost concerns?</li>
+                            <li>What would "better deployment speed" mean for us?</li>
+                        </ul>
+                    </div>
+
+                    <div class="discussion-box">
+                        <h4>On Migration Strategy</h4>
+                        <ul>
+                            <li>What's one service that would be good to extract first?</li>
+                            <li>What would success look like for that service?</li>
+                            <li>How would we measure improvement (speed, cost, reliability)?</li>
+                        </ul>
+                    </div>
+
+                    <h3>Next Steps</h3>
+                    <ol style="margin-left: 20px; margin-top: 20px;">
+                        <li><strong>Schedule training sessions</strong> — Present this material to your team (3-4 sessions)</li>
+                        <li><strong>Run event storming workshop</strong> — Discover your domain boundaries</li>
+                        <li><strong>Create service roadmap</strong> — Decide what to extract and in what order</li>
+                        <li><strong>Pick a pilot service</strong> — Choose the first service to extract</li>
+                        <li><strong>Get executive alignment</strong> — Make sure leadership understands the timeline</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>This is living documentation. Update it with your team's learnings, examples from your domain, and lessons from your migration.</p>
+            <p style="margin-top: 15px; color: #999; font-size: 0.9em;">Last updated: 2024</p>
+        </div>
+    </div>
+
+    <script>
+        mermaid.initialize({ startOnLoad: true, theme: 'default' });
+
+        function openTab(evt, tabName) {
+            // Hide all tab contents
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabContents.forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // Remove active class from all buttons
+            const tabButtons = document.querySelectorAll('.tab-btn');
+            tabButtons.forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // Show the specific tab content
+            document.getElementById(tabName).classList.add('active');
+            evt.currentTarget.classList.add('active');
+
+            // Re-render mermaid diagrams
+            mermaid.contentLoaded();
+        }
+
+        function toggleCollapsible(button) {
+            button.classList.toggle('active');
+            const content = button.nextElementSibling;
+            content.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>
