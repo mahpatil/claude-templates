@@ -4,6 +4,8 @@
 
 ## The Story: From Monolith to Cloud
 
+<img width="1536" height="1024" alt="ChatGPT Image Feb 11, 2026, 09_49_34 PM" src="https://github.com/user-attachments/assets/d397ec3f-e9cf-4f72-a311-55eeba32fe0c" />
+
 **2010:** Your company **launches** a successful web application. A single codebase handles everything—user management, orders, payments, inventory, notifications. Your team is **5 developers**. Deployments are simple. Everyone understands the whole system.
 
 **2015:** Business is **booming**. You have **20 developers**. Merging code is painful. A **typo** in the payment module **crashed the entire system** last month, taking down users and orders with it. You want to scale the order processing for the holiday season, but scaling requires deploying the entire app—which means re-testing everything.
