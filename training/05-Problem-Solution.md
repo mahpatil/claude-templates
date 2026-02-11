@@ -1,3 +1,5 @@
+[← Back to Index](./INDEX.md)
+
 # 🔄 Module 5: Problem-Solution Patterns
 
 ## Problem #1: Multiple Teams, One Codebase
@@ -234,3 +236,7 @@ timeline
 | Risk | High (entire system) | Low (1 service) |
 
 **RESULT: Ship 8-10x faster with lower risk!**
+
+---
+
+[← Back to Index](./INDEX.md) | [Previous: Module 4](./04-DDD-Concepts.md) | [Next: Module 6 →](./06-Principles.md)

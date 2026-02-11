@@ -1,3 +1,5 @@
+[← Back to Index](./INDEX.md)
+
 # 📖 Module 1: The Journey - Why We're Here
 
 ## The Story: From Monolith to Cloud
@@ -17,3 +19,7 @@
 ## Why Microservices?
 
 The challenges of growing organizations with monolithic systems led to a fundamental shift in how we build software. Microservices aren't just about technology—they're about enabling team independence, faster deployment cycles, and efficient resource utilization.
+
+---
+
+[← Back to Index](./INDEX.md) | [Next: Module 2 →](./02-Monolith-Pain.md)

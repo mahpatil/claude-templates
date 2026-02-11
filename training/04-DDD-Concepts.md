@@ -1,3 +1,5 @@
+[← Back to Index](./INDEX.md)
+
 # 🎯 Module 4: Domain-Driven Design - The Missing Piece
 
 ## The Problem DDD Solves
@@ -177,3 +179,7 @@ Benefits:
 4. **Design repositories:** How do we persist and retrieve aggregates?
 5. **Define API contracts:** How do bounded contexts communicate?
 6. **Implement in services:** Each bounded context becomes a microservice
+
+---
+
+[← Back to Index](./INDEX.md) | [Previous: Module 3](./03-Microservices.md) | [Next: Module 5 →](./05-Problem-Solution.md)

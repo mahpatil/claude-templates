@@ -1,3 +1,5 @@
+[← Back to Index](./INDEX.md)
+
 # 📚 Module 6: Cloud-Native Core Principles
 
 ## The 13 Core Principles
@@ -167,3 +169,7 @@ These principles guide all decisions:
 | **Quality & security built-in** | Not added later | Tests, security scans in CI/CD pipeline |
 | **Living documentation** | Documentation stays current | Auto-generated from code where possible |
 | **Continuous learning** | Retrospectives, post-mortems, evolution | After incidents, ask "what can we learn?" |
+
+---
+
+[← Back to Index](./INDEX.md) | [Previous: Module 5](./05-Problem-Solution.md) | [Next: Module 7 →](./07-Roadmap.md)

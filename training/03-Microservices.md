@@ -1,3 +1,5 @@
+[← Back to Index](./INDEX.md)
+
 # 🚀 Module 3: Introducing Cloud-Native Microservices
 
 ## The Core Insight
@@ -160,3 +162,7 @@ Fallback: Send notifications via email instead
 ```
 
 **Benefit:** Failures are contained. System gracefully degrades.
+
+---
+
+[← Back to Index](./INDEX.md) | [Previous: Module 2](./02-Monolith-Pain.md) | [Next: Module 4 →](./04-DDD-Concepts.md)

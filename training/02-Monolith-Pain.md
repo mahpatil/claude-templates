@@ -1,3 +1,5 @@
+[← Back to Index](./INDEX.md)
+
 # 🏗️ Module 2: The Monolithic Architecture & Its Real Pain Points
 
 ## The Monolith Structure
@@ -97,3 +99,7 @@ if (user.isActive === false) {  // Bug: should be true
 **Blast radius:** ENTIRE SYSTEM DOWN. All services affected. All users impacted.
 
 **Recovery:** Rollback the entire application. 30 minutes of downtime. Lost revenue. Customer trust damaged.
+
+---
+
+[← Back to Index](./INDEX.md) | [Previous: Module 1](./01-The-Journey.md) | [Next: Module 3 →](./03-Microservices.md)
