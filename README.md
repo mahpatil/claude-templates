@@ -31,32 +31,28 @@ git clone https://github.com/mahpatil/engineering-playbook.git
 cd engineering-playbook
 
 # Explore standards
-cd standards/ci-cd-pipeline
+cd standards/overall
 cat README.md
-
-# Use code samples
-cd examples/python
-pip install -r requirements.txt
-python event_producer.py
 ```
 
-## 📖 Standards Catalog
+## 📖 Catalog
 
 
 | Standard | Maturity | Cloud Support | README |
 |----------|----------|---------------|--------|
-| [Overall north star](./standards/overall/) | 🚧 Beta | Platform Agnostic | [View](./standards/overall/README.md) |
-| [Cloud native](./standards/02-cloud-native/) | 🚧 Beta | Platform Agnostic | [View](./standards/02-cloud-native/README.md) |
-| [Microservices](./standards/03-microservices/) | 🚧 Beta | Platform Agnostic  | [View](./standards/03-microservices/README.md) |
-| [API Design](./standards/04-api-design/) | ✅ Production | Platform Agnostic | [View](./standards/04-api-design/README.md) |
-| [Data Architecture](./standards/05-data/) | ✅ Production | AWS, Azure | [View](./standards/05-data/README.md) |
-| [Event-Driven Architecture - EDA](./standards/06-event-driven-architecture/) | ✅ Production | AWS, Azure, GCP | [View](./standards/06-event-driven-architecture/README.md) |
-| [DevSecOps practices](./standards/07-devsecops/) | ✅ Production | Multi-cloud | [View](./standards/07-devsecops/README.md) |
-| [CI/CD Pipeline](./standards/08-ci-cd-pipeline/) | ✅ Production | AWS, Azure, GCP | [View](./standards/08-ci-cd-pipeline/README.md) |
-| [Observability standards](./standards/09-observability/) | ✅ Production | Multi-cloud | [View](./standards/09-observability/README.md) |
-| [High Availability - HA](./standards/10-high-availability/) | ✅ Production | AWS, Azure | [View](./standards/10-high-availability/README.md) |
-| [Scaling Patterns](./standards/11-scaling/) | ✅ Production | AWS, Azure | [View](./standards/11-scaling/README.md) |
-| [Disaster Recovery - DR](./standards/12-disaster-recovery/) | ✅ Production | AWS, Azure | [View](./standards/12-disaster-recovery/README.md) |
+| [Overall north star](./standards/overall/) | 🚧 Beta | Platform Agnostic Modern Architecture | [View](./standards/overall/README.md) |
+| [Claude Templates](./templates/) | 🚧 Beta | Claude Code | [View](./templates/README.md) |
+| [(dot)Claude](./.claude) | 🚧 Beta | Claude Code | Claude user level settings e.g. commands, agents |
+| Microservices | 📋 Planned | Platform Agnostic | Coming soon |
+| API Design | 📋 Planned | Platform Agnostic | Coming soon |
+| Data Architecture | 📋 Planned | AWS, Azure | Coming soon |
+| Event-Driven Architecture - EDA | 📋 Planned | AWS, Azure, GCP | Coming soon |
+| DevSecOps practices | 📋 Planned | Multi-cloud | Coming soon |
+| CI/CD Pipeline | 📋 Planned | AWS, Azure, GCP | Coming soon |
+| Observability standards | 📋 Planned | Multi-cloud | Coming soon |
+| High Availability - HA | 📋 Planned | AWS, Azure | Coming soon |
+| Scaling Patterns | 📋 Planned | AWS, Azure | Coming soon |
+| Disaster Recovery - DR | 📋 Planned | AWS, Azure | Coming soon |
 
 
 ## 👨‍💻 For Technical Teams
@@ -95,8 +91,8 @@ module "ha_infrastructure" {
 
 Architecture decision records (ADRs) and design patterns:
 
-- [When to use Event-Driven Architecture](./standards/event-driven-architecture/decisions/001-when-to-use-eda.md)
-- [Multi-Cloud Strategy](./standards/cloud-native/decisions/002-multi-cloud-strategy.md)
+- When to use Event-Driven Architecture (coming soon)
+- Multi-Cloud Strategy (coming soon)
 
 ## 💼 For Non-Technical Stakeholders
 
@@ -108,7 +104,7 @@ Each technical standard includes a **business-friendly explanation**:
 - **Risks**: What happens if we don't do this
 - **Metrics**: How we measure success
 
-Example: [High Availability for Executives](./standards/high-availability/docs/for-executives.md)
+Example: High Availability for Executives (coming soon)
 
 ## 🤝 Contributing
 
@@ -118,7 +114,7 @@ We welcome contributions! See [CONTRIBUTING.md](./CONTRIBUTING.md) for guideline
 
 1. **Fork** the repository
 2. **Create** a feature branch (`git checkout -b feature/new-standard`)
-3. **Follow** the [standard template](./templates/STANDARD_TEMPLATE.md)
+3. **Follow** the standard template (coming soon)
 4. **Submit** a pull request
 
 

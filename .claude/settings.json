@@ -1,0 +1,41 @@
+{
+  "permissions": {
+    "defaultMode": "default"
+  },
+  "model": "sonnet",
+  "allowedCommands": [
+    "git",
+    "python",
+    "pip",
+    "pytest",
+    "uv",
+    "pipx",
+    "java",
+    "javac",
+    "mvn",
+    "gradle",
+    "gradlew",
+    "docker",
+    "docker-compose",
+    "make"
+  ],
+  "allowedDirectories": [
+    "/Users/maheshpatil/workspace-idt/"
+  ],
+  "git": {
+    "respectIgnore": true
+  },
+  "hooks": {
+    "Stop": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash /Users/maheshpatil/.claude/hooks/session-tracker.sh"
+          }
+        ]
+      }
+    ]
+  }
+}
