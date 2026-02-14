@@ -9,7 +9,7 @@
 ## Tech Stack
 
 - **Backend:** Java 25+ / Spring Boot 4.0+ / Gradle
-- **Frontend:** React 19+ / TypeScript 5.x (strict) / Vite
+- **Frontend:** React 19+ / TypeScript 5.x (strict) / Vite, design system (select most appropriate: carbon, fluent2, apple human, materialm3, polaris)
 - **Database:** PostgreSQL (CloudSQL), Redis for caching
 - **Infra:** Docker / Kubernetes / Terraform / GCP
 - **Messaging:** Kafka or GCP Pub/Sub (Avro/Protobuf schemas)
@@ -22,7 +22,7 @@
 ## Architecture
 
 - Open source and open standards
-- Ensure all software is portable across providers. Abstract cloud-specific implementations
+- Ensure all software is portable across cloud providers. Abstract cloud-specific implementations
 - Hexagonal architecture: Domain (no framework deps) → Application → Infrastructure (adapters)
 - Domain-Driven Design with bounded contexts, aggregates, value objects, domain events
 - Event-driven integration between services (outbox pattern, saga for workflows)

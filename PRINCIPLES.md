@@ -32,7 +32,7 @@ Quick reference for core engineering principles. For detailed standards, see [st
 9. **Cost Optimization** - Right-sizing, auto-scaling, FinOps
 10. **Automation First** - CI/CD, automated testing, security scanning
 11. **Infrastructure as Code** - Version-controlled, repeatable deployments
-12. **AI-First Design** - Inference endpoints, feature stores, feedback loops from inception
+12. **AI-Native Design** - Prompt-driven interfaces, RAG over fine-tuning, agentic orchestration, evaluation-as-code, and human-in-the-loop guardrails from inception
 13. **Open Source & Open Standards** - Prefer OAUTH, OpenTelemetry, Kubernetes over proprietary
 
 ---
@@ -54,7 +54,8 @@ Quick reference for core engineering principles. For detailed standards, see [st
 - Active maintenance and community support
 - Clear licensing compatible with commercial use
 - Performance characteristics matching requirements
-- AI/ML frameworks with production-ready serving capabilities
+- LLM frameworks with structured output, tool use, and observability (e.g., LangChain, Claude SDK, OpenAI SDK)
+- Evaluation and guardrail tooling for prompt regression testing and safety
 
 ---
 
