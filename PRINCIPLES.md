@@ -70,4 +70,5 @@ Quick reference for core engineering principles. For detailed standards, see [st
 | [metrics.md](./standards/overall/metrics.md) | Observability and metrics |
 | [checklists.md](./standards/overall/checklists.md) | Implementation checklists |
 | [decision-framework.md](./standards/overall/decision-framework.md) | Decision framework |
+| [llm-design.md](./standards/overall/llm-design.md) | LLM-native design standards |
 | [glossary.md](./standards/overall/glossary.md) | Glossary of terms |

@@ -39,8 +39,8 @@ Assume the environment is compromised. Authenticate, authorize, and encrypt all 
 ### 6. Performance & Optimization
 Optimize through intelligent caching, compression, and efficient algorithms for minimal latency. Define SLOs and measure against them continuously.
 
-### 7. AI-First Design
-Embed AI/ML capabilities as first-class citizens, not bolt-ons. Design systems with inference endpoints, feature stores, and feedback loops from inception.
+### 7. AI-Native Design
+Embed AI capabilities (LLM based) as first-class architectural primitives, not bolt-ons. Default to RAG over fine-tuning, prompt-driven interfaces, agentic orchestration with tool use, evaluation-as-code in CI, and human-in-the-loop guardrails from inception. See [llm-design.md](./llm-design.md) for detailed standards.
 
 ### 8. High Availability
 Design for redundancy, failover mechanisms, and graceful degradation under failure conditions. No single points of failure. Multi-zone and multi-region awareness.
@@ -263,4 +263,5 @@ Organize teams around business domains; enable independent service ownership and
 - Active maintenance and community support
 - Clear licensing compatible with commercial use
 - Performance characteristics matching requirements
-- AI/ML frameworks with production-ready serving capabilities
+- LLM frameworks with structured output, tool use, and observability (e.g., LangChain, Claude SDK, OpenAI SDK)
+- Evaluation and guardrail tooling for prompt regression testing and safety
