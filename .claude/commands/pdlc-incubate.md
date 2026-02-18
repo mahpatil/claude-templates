@@ -1,4 +1,3 @@
-koe stands for voice, i want to build a solution that allows customers to record their live voice calls and then provides them nudges on how they can respond better. 
 Create initial usecase will be for initial set of audience
 
 Ask for: Geographies, locations and scope
