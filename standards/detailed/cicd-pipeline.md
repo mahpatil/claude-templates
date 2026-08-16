@@ -4,6 +4,10 @@
 
 ---
 
+> **What this describes:** A self-service CI/CD platform where developers request a service, an AI coding agent generates the Terraform infrastructure, GitHub runs validation, approval and security gates, and Azure hosts the resulting application containers — with regulatory compliance built in rather than bolted on.
+
+---
+
 # 🧠 Overview
 
 This platform enables developers to **self-service infrastructure and deployments** without needing deep IaC knowledge, while enforcing **Regulatory compliance by design**.
@@ -82,10 +86,27 @@ domain-infra/   # Infrastructure repo for each domain
   │    ├── dev/ #Environment specific tfvars and tf files
   │    └── prod/
 
-service-templates/
-  ├── api-service/
-  ├── worker-service/
+service-templates/  # Organised by programming language
+  ├── python/       # API + worker app templates for Python repos
+  │   ├── api-service/
+  │   └── worker-service/
+  ├── java/         # API + worker app templates for Java repos
+  │   ├── api-service/
+  │   └── worker-service/
+  └── dotnet/       # API + worker app templates for .NET repos
+      ├── api-service/
+      └── worker-service/
 ```
+
+> The repository structure of a service is based on its **programming language**: templates live under `service-templates/<language>/`, and the generated application service repo follows the same language's conventional layout (e.g. `src/`, `tests/`, `pyproject.toml` / `pom.xml` / `.csproj`), so developers get a scaffold that matches their language's tooling and ecosystem.
+
+**Application Service Repo Responsibilities** — each generated service repo owns:
+
+* The service's source code, tests, and build configuration (language-native)
+* A container image (Dockerfile) for the app, built and published by CI
+* CI/CD pipeline definition (validation, tests, image scan, deploy)
+* References to platform-managed infra (Key Vault, DB, network) — never raw Terraform
+* Service manifests/health checks and deployment metadata
 
 ---
 
@@ -199,6 +220,8 @@ flowchart TD
 
 ```
 
+**What it shows:** The full journey from a developer's request to a running service — the AI agent generates and PRs the Terraform, the pipeline validates and scans it, a manual approval gate must pass (PCI requirement), then the infra is applied and the application is deployed.
+
 ---
 
 ## 🧱 Platform Architecture
@@ -222,6 +245,8 @@ flowchart LR
     DB --> App
 ```
 
+**What it shows:** How the pieces fit together at runtime — developers interact with GitHub, the AI agent produces Terraform, the landing zone provisions networking, Container Apps, Key Vault and the database, and the application service (Python, Java, or .NET) consumes Key Vault for secrets and the database over private networking.
+
 ---
 
 ## 🔐 Regulatory Compliance Control Flow
@@ -239,6 +264,8 @@ flowchart TD
     E --> F[Policy Enforcement]
     F --> G[Secure Resources Created]
 ```
+
+**What it shows:** Compliance is enforced in the pipeline itself — every Terraform change must pass policy and security scans or the PR is rejected; only after the approval gate is infra deployed, with policy enforcement continuing to guard the resources afterwards.
 
 ---
 
