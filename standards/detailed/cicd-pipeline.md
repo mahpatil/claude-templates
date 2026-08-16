@@ -1,10 +1,10 @@
 # 📦 Self-Service CI/CD Platform
 
-## AI Coding Agent + GitHub + Terraform + Azure
+## AI Coding Agent + GitHub + Terraform + AWS/Azure/GCP
 
 ---
 
-> **What this describes:** A self-service CI/CD platform where developers request a service, an AI coding agent generates the Terraform infrastructure, GitHub runs validation, approval and security gates, and Azure hosts the resulting application containers — with regulatory compliance built in rather than bolted on.
+> **What this describes:** A self-service CI/CD platform where developers request a service, an AI coding agent or a human (with AI assistance) generates the Terraform infrastructure or application code, GitHub runs validation, approval and security gates, and AWS/Azure/GCP hosts the resulting application containers — with regulatory compliance built in rather than bolted on.
 
 ---
 
@@ -12,7 +12,7 @@
 
 This platform enables developers to **self-service infrastructure and deployments** without needing deep IaC knowledge, while enforcing **Regulatory compliance by design**.
 
-Note this standard assumes that you will use AI coding agents such as Goose, Claude Code, Codex to build your infrastructure.
+Note this standard assumes that you will use AI coding agents such as Claude Code, Codex, AGY to build your infrastructure.
 
 ### Core Idea
 
@@ -87,18 +87,19 @@ domain-infra/   # Infrastructure repo for each domain
   │    └── prod/
 
 service-templates/  # Organised by programming language
-  ├── python/       # API + worker app templates for Python repos
+  ├── .github/       # GitHub workflows
+  │   └── workflows/
+  ├── services/         # API + worker app, data migrations & tests based on the prog language
   │   ├── api-service/
   │   └── worker-service/
-  ├── java/         # API + worker app templates for Java repos
-  │   ├── api-service/
-  │   └── worker-service/
-  └── dotnet/       # API + worker app templates for .NET repos
-      ├── api-service/
-      └── worker-service/
+  └── docs/       # Requirements, design, release documentation
+      ├── specs/
+      ├── adr/
+      ├── archive/
+      └── CHANGELOG.md
 ```
 
-> The repository structure of a service is based on its **programming language**: templates live under `service-templates/<language>/`, and the generated application service repo follows the same language's conventional layout (e.g. `src/`, `tests/`, `pyproject.toml` / `pom.xml` / `.csproj`), so developers get a scaffold that matches their language's tooling and ecosystem.
+> The repository structure of a service is based on its **programming language**: templates live under `service-templates/`, and the generated application service repo follows the same language's conventional layout (e.g. `src/`, `tests/`, `pyproject.toml` / `pom.xml` / `.csproj`), so developers get a scaffold that matches their language's tooling and ecosystem.
 
 **Application Service Repo Responsibilities** — each generated service repo owns:
 
@@ -163,13 +164,13 @@ New API Service:
 # 🚀 Evolution Roadmap
 
 ## Phase 1
-
-* PR-based self-service
-* AI Coding Agent generates IaC
+* GitHub Issues → structured requests
+* Humans write code using AI Assistance
 
 ## Phase 2
 
-* GitHub Issues → structured requests
+* PR-based self-service
+* AI Coding Agent generates IaC/code
 
 ## Phase 3
 
@@ -220,7 +221,7 @@ flowchart TD
 
 ```
 
-**What it shows:** The full journey from a developer's request to a running service — the AI agent generates and PRs the Terraform, the pipeline validates and scans it, a manual approval gate must pass (PCI requirement), then the infra is applied and the application is deployed.
+**What it shows:** The full journey from a developer's request to a running service — the AI agent/human generates and PRs the Terraform/application code, the pipeline validates and scans it, a manual approval gate must pass (PCI requirement), then the infra is applied and the application is deployed.
 
 ---
 
@@ -278,15 +279,5 @@ This platform provides:
 * ✅ Full auditability via GitHub
 * ✅ Scalable platform architecture
 * ✅ Extensible AI-driven automation via AI Coding Agent
-
----
-
-## 💡 Strategic Insight
-
-This is effectively an **Internal Developer Platform (IDP)** where:
-
-* Platform team defines guardrails
-* Developers self-serve safely
-* AI accelerates infrastructure delivery
 
 ---
