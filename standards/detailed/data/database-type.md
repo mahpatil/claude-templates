@@ -100,7 +100,7 @@ Start here. This is the highest-leverage database decision one can make.
 - Write graph queries (Cypher, Gremlin) against relationship-centric questions: "who knows who", "what did this account touch in the last 24 hours"
 - Graph databases are not general-purpose; keep your system of record in a relational store and sync to graph for relationship queries
 
-**Use:** Neo4j, Amazon Neptune
+**Use:** Neo4j, Amazon Neptune, Azure Cosmos DB (Gremlin)
 **Avoid when:** The domain is not fundamentally relationship-centric; team has no graph query language experience
 
 ---

@@ -129,7 +129,7 @@ Event consumers are deployed independently. A producer may update its schema whi
 - Use backward-compatible changes only without bumping the version: adding optional fields
 - Use forward-compatible changes only without bumping the version: removing fields consumers ignore
 - Breaking changes (rename, type change, required field removal) require a new version
-- Maintain a schema registry (Confluent, AWS Glue, Azure Schema Registry) for all event schemas
+- Maintain a schema registry (Confluent, AWS Glue, Azure Schema Registry, Google Dataplex) for all event schemas
 - Run consumer contract tests (Pact) before deploying producer changes
 
 **Standard event envelope:**
@@ -259,16 +259,16 @@ Global ordering is expensive. Partition-level ordering is sufficient for most do
 
 ### Message Broker Comparison
 
-| Concern | Apache Kafka | RabbitMQ | AWS EventBridge | Azure Event Grid |
-|---------|-------------|----------|-----------------|-----------------|
-| **Best for** | High-throughput event streaming, event sourcing | Task queues, complex routing | AWS-native integrations | Azure-native integrations |
-| **Ordering** | Per-partition | Per-queue | Best-effort | Best-effort |
-| **Retention** | Configurable (days–forever) | Until consumed | 24 hours | 24 hours |
-| **Throughput** | Millions/sec | Thousands/sec | Moderate | Moderate |
-| **Consumer model** | Pull (poll) | Push | Push | Push |
-| **Schema registry** | Confluent / AWS Glue | N/A | Schema Registry | Schema Registry |
-| **Replay** | Yes (offset rewind) | No (once consumed) | No | No |
-| **Use in this playbook** | Default for inter-service events | Task/job queuing | AWS integration events | Azure integration events |
+| Concern | Apache Kafka | RabbitMQ | AWS EventBridge | Azure Event Grid | GCP Cloud Pub/Sub |
+|---------|-------------|----------|-----------------|-----------------|-----------------|
+| **Best for** | High-throughput event streaming, event sourcing | Task queues, complex routing | AWS-native integrations | Azure-native integrations | GCP-native integrations |
+| **Ordering** | Per-partition | Per-queue | Best-effort | Best-effort | Best-effort |
+| **Retention** | Configurable (days–forever) | Until consumed | 24 hours | 24 hours | Up to 31 days |
+| **Throughput** | Millions/sec | Thousands/sec | Moderate | Moderate | High |
+| **Consumer model** | Pull (poll) | Push | Push | Push | Pull (push available) |
+| **Schema registry** | Confluent / AWS Glue | N/A | Schema Registry | Schema Registry | Google Schema Registry |
+| **Replay** | Yes (offset rewind) | No (once consumed) | No | No | No (snapshot restore) |
+| **Use in this playbook** | Default for inter-service events | Task/job queuing | AWS integration events | Azure integration events | GCP integration events |
 
 ### When to Choose What
 
@@ -281,12 +281,8 @@ High throughput (>10k events/sec)?
   └─ Yes ──▶ Kafka
   └─ No ──▶ Continue
 
-AWS-native services as producer/consumer?
-  └─ Yes ──▶ EventBridge
-  └─ No ──▶ Continue
-
-Azure-native services as producer/consumer?
-  └─ Yes ──▶ Event Grid
+Cloud-native services as producer/consumer?
+  └─ Yes ──▶ Cloud event bus (EventBridge / Event Grid / Pub-Sub)
   └─ No ──▶ RabbitMQ or Kafka
 ```
 
