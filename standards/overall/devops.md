@@ -12,10 +12,10 @@ Tools and standards for CI/CD, deployment, and developer experience.
 | GitHub Actions  | Build and Deploy pipelines   | All build and deployment via GitHub Actions   |
 | Code quality and security  | Sonar Scanner  | Static Code Aanalysis   |
 | Build scripting| Gradle, npm | Gradle for all java build scripting, npm for front-end |
-| Secret Management  | GitHub Secrets & GCP   | Secrets for build and deploy in GitHub and GCP for runtime secrets   |
+| Secret Management  | GitHub Secrets & Cloud Provider (AWS/GCP/Azure)   | Secrets for build and deploy in GitHub and the cloud provider for runtime secrets   |
 | Infrastructure as Code | Terraform | All infrastructure provisioning to be done via Terraform  |
 | IDE | VS Code   | Engineers to use VSCode as IDE  |
-| Artifact management | GCP Artifact Registry   | All generated artifadcts  |
+| Artifact management | Cloud container registry (e.g., AWS ECR, GCP Artifact Registry, Azure ACR)   | All generated artifacts  |
 | Unit testing | Junit (Java), Jest(JS)   | Junit for java tests, Jest for javascript  |
 | Contract testing | PACT   | contract-based testing for Consumer-Driven tests |
 | Integration testing | Cucumber, Testcontainers  | BDD Style tests for integration tests  and test containers to manage services|
@@ -77,7 +77,7 @@ test: add integration tests for payment flow
 │   └── deploy-prod.yml     # Production deployment
 └── actions/
     ├── setup-java/         # Reusable setup
-    └── deploy-cloudrun/    # Reusable deploy
+    └── deploy-cloud/       # Reusable deploy
 ```
 
 ### CI Workflow Example

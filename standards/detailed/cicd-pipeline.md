@@ -20,7 +20,7 @@ Note this standard assumes that you will use AI coding agents such as Claude Cod
 * AI Coding Agent generates Terraform
 * GitHub manages workflow & approvals
 * Terraform provisions infrastructure
-* Azure hosts workloads
+* Cloud provider (AWS, GCP, Azure) hosts workloads
 * Apps run as **Application (Python, Java, .NET) containers** on Container Apps
 
 ---

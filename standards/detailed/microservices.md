@@ -156,7 +156,7 @@ All inter-service communication is authenticated and authorized. Services never 
 - mTLS for all service-to-service communication within the cluster
 - JWT or OAuth 2.0 tokens for API access — validate on every request
 - Network policies restrict which services can communicate (default deny)
-- Secrets injected at runtime via a vault (HashiCorp Vault, AWS Secrets Manager) — never in environment variables or config files
+- Secrets injected at runtime via a vault (HashiCorp Vault, AWS Secrets Manager, GCP Secret Manager, Azure Key Vault) — never in environment variables or config files
 - Principle of least privilege: each service has only the permissions it needs
 
 ---

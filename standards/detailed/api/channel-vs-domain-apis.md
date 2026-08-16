@@ -7,7 +7,7 @@ Two API layers with opposite jobs.
 
 Between them sits a **composition / adaptation layer** (BFF, gateway, aggregators) that adapts one to the other, so front ends don't couple to internal boundaries — except where a channel deliberately consumes a domain API directly (see [When channels can call domain APIs directly](#when-channels-can-call-domain-apis-directly)).
 
-> **Direct access is allowed.** The composition / adaptation layer is the *default* path between channels and domains — not a hard requirement. When a domain API's contract already matches what a channel needs, the channel can call the domain API directly without a channel API in front of it.
+> **Direct access is allowed.** The composition / adaptation layer is not a hard requirement. When a domain API's contract closely matches channel needs, the channel can call the domain API directly without a channel API in front of it - there is no need for an unnecessary wrapper.
 
 ---
 

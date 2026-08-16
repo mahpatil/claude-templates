@@ -119,14 +119,14 @@ metadata:
 spec:
   refreshInterval: 1h
   secretStoreRef:
-    name: gcp-secret-store
+    name: cloud-secret-store
     kind: ClusterSecretStore
   target:
     name: db-credentials
   data:
     - secretKey: password
       remoteRef:
-        key: projects/PROJECT_ID/secrets/db-password
+        key: db-password
 ```
 
 ### Secret Rotation

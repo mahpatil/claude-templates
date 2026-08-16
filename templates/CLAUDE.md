@@ -10,13 +10,13 @@
 
 - **Backend:** Java 25+ / Spring Boot 4.0+ / Gradle
 - **Frontend:** React 19+ / TypeScript 5.x (strict) / Vite, design system (select most appropriate: carbon, fluent2, apple human, materialm3, polaris)
-- **Database:** PostgreSQL (CloudSQL), Redis for caching
-- **Infra:** Docker / Kubernetes / Terraform / GCP
-- **Messaging:** Kafka or GCP Pub/Sub (Avro/Protobuf schemas)
+- **Database:** PostgreSQL (managed cloud service), Redis for caching
+- **Infra:** Docker / Kubernetes / Terraform / Cloud (AWS/GCP/Azure)
+- **Messaging:** Kafka or managed cloud eventing (e.g., GCP Pub/Sub, Azure Event Hubs) (Avro/Protobuf schemas)
 - **CI/CD:** GitHub Actions
 
 ## Deployment
-- **IaC**: use Terraform to setup cloud resources (GCP)
+- **IaC**: use Terraform to setup cloud resources (provider-agnostic)
 - **Local**: for local deployment generate k8s for kind & minikube
 
 ## Architecture

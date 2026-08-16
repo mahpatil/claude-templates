@@ -203,7 +203,7 @@ startupProbe:
 | Broker | Use Case | Considerations |
 |--------|----------|----------------|
 | Kafka | High throughput, event streaming | Complex operations, higher overhead |
-| GCP Pub/Sub | Cloud-native, managed | GCP-specific, simpler operations |
+| Cloud event bus (e.g., Pub/Sub, Event Grid, EventBridge) | Cloud-native, managed | Provider-specific, simpler operations |
 | RabbitMQ | Traditional messaging, routing | Lower throughput than Kafka |
 
 ### Schema Registry

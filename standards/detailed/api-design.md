@@ -408,7 +408,7 @@ External vendor or SaaS APIs that the organization integrates with (e.g., paymen
 
 **Design considerations:**
 - Always wrap behind an anti-corruption layer (ACL) — internal code never calls vendor SDKs directly; a thin adapter translates between internal domain models and vendor contracts
-- Credentials stored in a vault (HashiCorp Vault, AWS Secrets Manager) — never in source code or environment variables
+- Credentials stored in a vault (HashiCorp Vault, AWS Secrets Manager, GCP Secret Manager, Azure Key Vault) — never in source code or environment variables
 - Pin to a specific API version; do not use `latest` — monitor vendor changelogs for breaking changes
 - Implement circuit breakers and fallbacks — design for vendor unavailability
 - Validate all data received from the vendor before using it — never trust external payloads
