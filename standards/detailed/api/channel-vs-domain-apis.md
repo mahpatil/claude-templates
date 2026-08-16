@@ -5,7 +5,7 @@ Two API layers with opposite jobs.
 - **Channel APIs** face outward. Each channel exposes *several* of them, one per experience slice (browse, checkout, account, and so on). They are stable for their consumers and composed for the screen.
 - **Domain APIs** face inward. They are canonical capabilities that own business logic and data, indifferent to who is calling.
 
-Between them sits a **composition / adaptation layer** (BFF, gateway, aggregators) that adapts one to the other, so front ends never couple to internal boundaries.
+Between them sits a **composition / adaptation layer** (BFF, gateway, aggregators) that adapts one to the other, so front ends don't couple to internal boundaries — except where a channel deliberately consumes a domain API directly (see [When channels can call domain APIs directly](#when-channels-can-call-domain-apis-directly)).
 
 ---
 
@@ -99,6 +99,28 @@ Often called a BFF (backend-for-frontend), API gateway, or aggregation service. 
 
 ---
 
+## When channels can call domain APIs directly
+
+The adapter layer is the *default* path, not a hard requirement. Not every domain API needs a channel API in front of it — a channel can consume a domain API directly whenever adding a composition layer would buy nothing.
+
+| Direct access is fine when | Use the adapter layer when |
+|---|---|
+| The channel's needs match the domain contract 1:1 — no reshaping, aggregation, or fan-out | The screen needs a composed payload stitched from several domains |
+| The consumer is the domain's own management surface (admin, back-office, merchandising tools) that edits the capability directly | You want to shield the domain from consumer-driven change and keep its versioning slow |
+| The payload is already screen-ready at domain granularity (a single entity or focused operation) | Multiple channels would couple to internal boundaries and block domain evolution |
+| Auth and blast radius are scoped — a narrow, trusted, first-party consumer | You need per-channel rate limits, quotas, or contract versions |
+| The caller is internal tooling or automation, not an end-user experience | The consumer is an end-user screen or a third party |
+
+Practical examples of fair direct-access use cases:
+
+- **Domain management UI** — a catalog management screen for merchandisers calls the Catalog domain API directly. The tool *is* the capability's editing surface; an adapter would only re-type the same contract.
+- **Admin / back-office screens** — order lookup, user management, and other single-entity screens render the domain response as-is, with no cross-domain composition.
+- **Internal automation** — data fixes, operational scripts, and reconciliation jobs consume the capability itself, not an experience.
+
+The default remains: end-user channels go through the adapter. Direct access is a decision you make deliberately, with the consequences above in mind — not an accident of convenience.
+
+---
+
 ## Where they differ
 
 | | Channel API | Domain API |
@@ -115,6 +137,6 @@ Often called a BFF (backend-for-frontend), API gateway, or aggregation service. 
 
 ## The core rule
 
-Dependencies point downward only. Channels depend on the adapter layer; the adapter depends on domains; domains depend on nothing above them and never call each other through channel APIs. That one-directional flow is what lets you ship a new mobile screen without touching checkout, or refactor inventory without breaking the storefront.
+Dependencies point downward only. Channels depend on the adapter layer — or, where direct access is justified, on a domain API whose contract already matches what the channel needs. The adapter depends on domains; domains depend on nothing above them and never call each other through channel APIs. That one-directional flow is what lets you ship a new mobile screen without touching checkout, or refactor inventory without breaking the storefront.
 
 ---
