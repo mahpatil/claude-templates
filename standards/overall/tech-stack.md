@@ -10,12 +10,12 @@ Technology stack and standards for selection and implementation.
 - **Frontend**: React with TypeScript, Vite
 - **Spring Cloud**: Microservices patterns and distributed system support
 - **Containers**: Docker for all services
-- **Orchestration**: Kubernetes (Kind locally, Cloud Run on GCP)
-- **Infrastructure**: Terraform for IaC to setup core GCP resources
-- **Database**: CloudSQL (GCP), local SQL/H2 for development
+- **Orchestration**: Kubernetes (Kind locally, managed Kubernetes or serverless containers on the target cloud)
+- **Infrastructure**: Terraform for IaC to setup core cloud resources
+- **Database**: Managed PostgreSQL (e.g., AWS RDS, GCP Cloud SQL, Azure Database), local SQL/H2 for development
 - **Caching**: Redis, cloud native
-- **Secrets**: GCP Secrets manager for runtime, GitHub secrets for build
-- **Events/Integration**: GCP Pub/Sub, Kafka
+- **Secrets**: Cloud provider secret manager (e.g., AWS Secrets Manager, GCP Secret Manager, Azure Key Vault) for runtime, GitHub secrets for build
+- **Events/Integration**: Managed event bus (e.g., AWS EventBridge/SNS, GCP Pub/Sub, Azure Event Grid), Kafka
 - **Config**: YAML for all Kubernetes and application configs
 - **OpenTelemetry**: Unified observability (traces, metrics, logs)
 - **React 19+**: Latest react library for web and native use interfaces.
@@ -225,7 +225,7 @@ src/
 ## Database
 
 ### PostgreSQL Standards
-- Use CloudSQL (GCP) for production
+- Use a managed PostgreSQL service (e.g., AWS RDS, GCP Cloud SQL, Azure Database for PostgreSQL) for production
 - H2 or local PostgreSQL for development
 - Connection pooling via HikariCP
 - Flyway for migrations
@@ -257,7 +257,7 @@ CREATE INDEX idx_orders_status ON orders(status);
 ## Caching
 
 ### Redis Standards
-- Use managed Redis (e.g., GCP Memorystore)
+- Use a managed Redis service (e.g., AWS ElastiCache, GCP Memorystore, Azure Cache for Redis)
 - Connection pooling via Lettuce
 - TTL on all cache entries
 - Cache key namespacing
@@ -375,4 +375,4 @@ ENTRYPOINT ["java", \
 | Integration Test | Testcontainers, Cucumber | End-to-end testing |
 | Performance Test | Grafana K6 | Load and performance testing |
 | Infrastructure | Terraform | Infrastructure as Code |
-| Container Registry | GCP Artifact Registry | Docker image storage |
+| Container Registry | Cloud container registry (e.g., AWS ECR, GCP Artifact Registry, Azure ACR) | Docker image storage |

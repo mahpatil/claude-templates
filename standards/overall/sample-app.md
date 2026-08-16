@@ -6,7 +6,7 @@ Reference architecture for a cloud-native e-commerce platform demonstrating the 
 
 ## System Overview
 
-A full-stack e-commerce demonstration featuring microservices (Java 21/Spring Boot) and React frontend with Google OAuth and local authentication. Supports deployment on both local Kind clusters and GCP Cloud Run.
+A full-stack e-commerce demonstration featuring microservices (Java 21/Spring Boot) and React frontend with Google OAuth and local authentication. Supports deployment on both local Kind clusters and a managed cloud provider (AWS, GCP, Azure).
 
 ```mermaid
 flowchart TB
@@ -16,7 +16,7 @@ flowchart TB
     end
 
     subgraph Edge["Edge Layer"]
-        CDN["CDN / Cloud CDN"]
+        CDN["CDN (e.g., CloudFront / Cloud CDN / Front Door)"]
         LB["Load Balancer"]
         Gateway["API Gateway"]
     end
@@ -44,14 +44,14 @@ flowchart TB
     end
 
     subgraph Events["Event Infrastructure"]
-        PubSub["GCP Pub/Sub<br/>/ Kafka"]
+        PubSub["Cloud Event Bus<br/>/ Kafka"]
     end
 
     subgraph Observability["Observability"]
         OTel["OpenTelemetry<br/>Collector"]
         Prometheus["Prometheus"]
         Grafana["Grafana"]
-        Logging["Cloud Logging"]
+        Logging["Log Backend"]
     end
 
     Web --> CDN
@@ -134,11 +134,11 @@ flowchart TB
 │   └── commons/                 # Shared UI libraries
 │
 ├── infra/                       # Infrastructure as Code
-│   ├── terraform/               # GCP resources
+│   ├── terraform/               # Cloud resources
 │   │   ├── modules/
-│   │   │   ├── cloudrun/
-│   │   │   ├── cloudsql/
-│   │   │   ├── pubsub/
+│   │   │   ├── compute/
+│   │   │   ├── database/
+│   │   │   ├── messaging/
 │   │   │   └── networking/
 │   │   ├── environments/
 │   │   │   ├── nonprod/
@@ -182,11 +182,11 @@ flowchart TB
 
 ## Deployment Architecture
 
-### GCP Cloud Run Deployment
+### Managed Cloud Deployment (e.g., Cloud Run)
 
 ```mermaid
 flowchart TB
-    subgraph GCP["Google Cloud Platform"]
+    subgraph Cloud["Cloud Provider"]
         subgraph Network["VPC Network"]
             subgraph Public["Public Subnet"]
                 GLB["Global Load Balancer"]
@@ -195,7 +195,7 @@ flowchart TB
             end
 
             subgraph Private["Private Subnet"]
-                subgraph CloudRun["Cloud Run Services"]
+                subgraph ManagedContainers["Managed Containers"]
                     AuthCR["auth-service"]
                     CatalogCR["catalog-service"]
                     CartCR["cart-service"]
@@ -206,17 +206,17 @@ flowchart TB
                 end
 
                 subgraph Data["Data Services"]
-                    CloudSQL["Cloud SQL<br/>(PostgreSQL)"]
-                    Memorystore["Memorystore<br/>(Redis)"]
-                    PubSub["Cloud Pub/Sub"]
+                    ManagedPostgres["Managed PostgreSQL"]
+                    ManagedRedis["Managed Redis"]
+                    CloudEvents["Cloud Event Bus"]
                 end
             end
         end
 
-        subgraph GCPServices["GCP Shared Services"]
-            CloudMonitor["Cloud Monitoring"]
-            CloudTrace["Cloud Trace"]
-            CloudLog["Cloud Logging"]
+        subgraph CloudServices["Cloud Shared Services"]
+            CloudMonitoring["Cloud Monitoring"]
+            CloudTracing["Cloud Tracing"]
+            CloudLogging["Cloud Logging"]
             SecretMgr["Secret Management"]
         end
     end
@@ -230,10 +230,10 @@ flowchart TB
     APIGW --> CartCR
     APIGW --> OrderCR
 
-    CloudRun --> CloudSQL
-    CloudRun --> Memorystore
-    CloudRun --> PubSub
-    CloudRun --> GCPServices
+    ManagedContainers --> ManagedPostgres
+    ManagedContainers --> ManagedRedis
+    ManagedContainers --> CloudEvents
+    ManagedContainers --> CloudServices
 ```
 
 ---
@@ -382,7 +382,7 @@ flowchart TB
     end
 
     subgraph Edge["Edge Security"]
-        WAF["WAF / Cloud Armor"]
+        WAF["WAF (e.g., AWS WAF / Cloud Armor / Azure WAF)"]
         Gateway["API Gateway"]
     end
 

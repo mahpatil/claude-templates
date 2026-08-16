@@ -96,10 +96,10 @@ Every data lake is organized into progressive refinement zones. Raw data flows i
 
 | Pattern | When to Use | How |
 |---------|-------------|-----|
-| **Batch** | Daily reports, financial summaries, non-time-sensitive analytics | Scheduled jobs (Airflow, Azure Data Factory, dbt) on a cadence |
+| **Batch** | Daily reports, financial summaries, non-time-sensitive analytics | Scheduled jobs (Airflow, managed orchestration like Azure Data Factory / AWS Glue, dbt) on a cadence |
 | **Micro-batch** | Near-real-time dashboards, hourly aggregates | Spark Structured Streaming or Flink with small batch intervals |
 | **Streaming** | Fraud detection, live dashboards, operational alerting | Kafka → Spark/Flink → Bronze landing in near-real-time |
-| **Change Data Capture (CDC)** | Replicating operational databases without touching production | Debezium or Azure DMS captures row-level changes from Postgres/SQL |
+| **Change Data Capture (CDC)** | Replicating operational databases without touching production | Debezium or a managed CDC service (e.g., Azure DMS, AWS DMS) captures row-level changes from Postgres/SQL |
 
 **Default to batch** unless the business requires near-real-time freshness. Streaming adds operational complexity — use it when latency matters, not as a default.
 

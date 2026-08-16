@@ -2,7 +2,7 @@
 
 ## Overview
 <!--This document outlines the architecture and implementation guidelines for building a production-ready, domain-driven, cloud native microservice using modern Java Spring back-end and react front-end technologies.-->
-A full-stack e-commerce demonstration featuring microservices (Java 21/Spring) and a React frontend with Google OAuth and local authentication. Supports deployment on both local Kind clusters and GCP Cloud Run with minimal infrastructure overhead.
+A full-stack e-commerce demonstration featuring microservices (Java 21/Spring) and a React frontend with Google OAuth and local authentication. Supports deployment on both local Kind clusters and a managed cloud provider (AWS, GCP, Azure) with minimal infrastructure overhead.
 
 ## Principles
 
@@ -26,12 +26,12 @@ A full-stack e-commerce demonstration featuring microservices (Java 21/Spring) a
 - **Frontend**: React with TypeScript, Vite
 - **Spring Cloud**: Microservices patterns and distributed system support
 - **Containers**: Docker for all services
-- **Orchestration**: Kubernetes (Kind locally, Cloud Run on GCP)
-- **Infrastructure**: Terraform for IaC to setup core GCP resources
-- **Database**: CloudSQL (GCP), local SQL/H2 for development
+- **Orchestration**: Kubernetes (Kind locally, managed Kubernetes or serverless containers on the target cloud)
+- **Infrastructure**: Terraform for IaC to setup core cloud resources
+- **Database**: Managed PostgreSQL (e.g., AWS RDS, GCP Cloud SQL, Azure Database), local SQL/H2 for development
 - **Caching**: Redis, cloud native
-- **Secrets**: GCP Secrets manager for runtime, GitHub secrets for build
-- **Events/Integration**: GCP Pub/Sub, Kafka
+- **Secrets**: Cloud provider secret manager (e.g., AWS Secrets Manager, GCP Secret Manager, Azure Key Vault) for runtime, GitHub secrets for build
+- **Events/Integration**: Managed event bus (e.g., AWS EventBridge/SNS, GCP Pub/Sub, Azure Event Grid), Kafka
 - **Config**: YAML for all Kubernetes and application configs
 - **OpenTelemetry**: Unified observability (traces, metrics, logs)
 - **React 19+**: Latest react library for web and native use interfaces.
@@ -50,10 +50,10 @@ A full-stack e-commerce demonstration featuring microservices (Java 21/Spring) a
 ### Deployment
 - Follow **trunk based development**, main/master is protected and is what is deployed
 - Generate manifests for **local kubernetes** (viz kind) deployment
-- Use **terraform** for setting up common resources on **GCP** (but not for application deployment and config)
-- **GitHub actions** for deployment of applications and configuration to GCP 
+- Use **terraform** for setting up common resources on the **target cloud** (but not for application deployment and config)
+- **GitHub actions** for deployment of applications and configuration to the target cloud 
 - **Modularize build and deployment workflows**, create separate files and orchestrate as required (avoid large monolithic build pipelines)
-- **Environments** Assume two environments Non production and production, both deployed across separate GCP Projects
+- **Environments** Assume two environments Non production and production, both deployed across separate cloud projects
 - **Promotion to prod** can only happen after successful non production deployments
 - Generate **versioned immutable artefact** after every build
 - Automate **release notes** creation
@@ -67,10 +67,10 @@ A full-stack e-commerce demonstration featuring microservices (Java 21/Spring) a
 | GitHub Actions  | Build and Deploy pipelines   | All build and deployment via GitHub Actions   |
 | Code quality and security  | Sonar Scanner  | Static Code Aanalysis   |
 | Build scripting| Gradle, npm | Gradle for all java build scripting, npm for front-end node |
-| Secret Management  | GitHub Secrets & GCP   | Secrets for build and deploy in GitHub and GCP for runtime secrets   |
+| Secret Management  | GitHub Secrets & Cloud Provider (AWS/GCP/Azure)   | Secrets for build and deploy in GitHub and the cloud provider for runtime secrets   |
 | Infrastructure as Code | Terraform | All infrastructure provisioning to be done via Terraform  |
 | IDE | VS Code   | Engineers to use VSCode as IDE  |
-| Artifact management | GCP Artifact Registry   | All generated artifadcts  |
+| Artifact management | Cloud container registry (e.g., AWS ECR, GCP Artifact Registry, Azure ACR)   | All generated artifacts  |
 | Unit testing | Junit (Java), Jest(JS)   | Junit for java tests, Jest for javascript  |
 | Contract testing | PACT   | contract-based testing for Consumer-Driven tests |
 | Integration testing | Cucumber, Testcontainers  | BDD Style tests for integration tests  and test containers to manage services|
@@ -136,7 +136,7 @@ ui
   └── mobile-ui         # ReactNative
 
 infra/                  # Infrastructure as Code
-  ├── gcp/              # GCP deployment scripts
+  ├── <provider>/       # Cloud deployment scripts
   └── kind/             # Kind cluster setup and K8s manifests
 ```
 
@@ -167,7 +167,7 @@ src/main/java/
 ### Java/Spring Services
 - Use Java 21 features (records, sealed classes, pattern matching)
 - Follow Spring Boot best practices: constructor injection, immutable configurations
-- Store properties in `src/main/resources/application.yml` (environment-specific: `application-local.yml`, `application-gcp.yml`)
+- Store properties in `src/main/resources/application.yml` (environment-specific: `application-local.yml`, `application-<provider>.yml`)
 - All services must include a `Dockerfile` at the root
 - Use `./gradlew` (checked-in wrapper) for all Gradle tasks
 
@@ -194,16 +194,16 @@ src/main/java/
 ## CI/CD & Deployment
 - **GitHub Actions**: Workflows in `.github/workflows/`
   - `ci.yml`: Runs backend tests and frontend lint/build on every PR/push.
-  - `deploy.yml`: Deploys to GCP Cloud Run on push to `main`.
+  - `deploy.yml`: Deploys to managed cloud runtime (e.g., Cloud Run) on push to `main`.
 - **Required GitHub Secrets**:
-  - `GCP_PROJECT_ID`: Your Google Cloud Project ID.
-  - `GCP_CREDENTIALS`: JSON Service Account key with Cloud Run Admin, Artifact Registry Admin, and Storage Admin roles.
+  - `CLOUD_PROJECT_ID`: Your cloud provider Project ID.
+  - `CLOUD_CREDENTIALS`: JSON Service Account key with deployment roles for the target cloud.
   - `JWT_SECRET`: (Optional) Secret key for JWT signing. Defaults to "none".
   - `APP_AUTH_REQUIRED`: (Optional) "true" or "false". Defaults to "true".
   - `GOOGLE_CLIENT_ID`: (Optional) Google OAuth2 Client ID. Defaults to "none".
   - `GOOGLE_CLIENT_SECRET`: (Optional) Google OAuth2 Client Secret. Defaults to "none".
 - **Deployment logic**:
-  1. Build/Push backend images to Artifact Registry.
+  1. Build/Push backend images to the container registry.
   2. Deploy backend services to get their URLs.
   3. Build/Push frontend image with backend URLs as build args.
   4. Deploy frontend and update auth-service with the final frontend URL.
@@ -219,7 +219,7 @@ src/main/java/
 - **Gradle permissions**: If `./gradlew` fails, run `chmod +x gradlew` in the service directory
 - **JWT validation**: Auth-service signs tokens; downstream services validate via `jwt-common` library
 - **CORS setup**: Frontend runs on `localhost:5173`; ensure backend allows this origin in development
-- **Database**: CloudSQL requires GCP credentials for production; use local H2/SQL for local development
+- **Database**: Managed PostgreSQL requires cloud credentials for production; use local H2/SQL for local development
 - **Kind cluster**: Use `skaffold dev` for auto-sync or manually run `kubectl apply` after Docker builds
 
 ## Recommended Development Workflow
@@ -227,7 +227,7 @@ src/main/java/
 2. **Plan**: Describe the feature before implementing
 3. **Implement**: Write code, run tests, verify locally
 4. **Test integration**: Deploy to Kind cluster and test end-to-end
-5. **Deploy**: Use Terraform for GCP or `kubectl` for Kind
+5. **Deploy**: Use Terraform for the target cloud or `kubectl` for Kind
 
 ## Implementation Checklist
 

@@ -81,7 +81,7 @@ Terraform modules, Kubernetes manifests, and CI/CD pipelines:
 ```terraform
 # Example: Multi-AZ high availability setup
 module "ha_infrastructure" {
-  source = "./standards/high-availability/terraform/aws"
+  source = "./standards/high-availability/terraform/<provider>"
   
   region_primary   = "us-east-1"
   region_secondary = "us-west-2"
