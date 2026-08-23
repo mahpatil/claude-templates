@@ -32,15 +32,15 @@ Guidance for teams building their first cloud network from scratch: choosing bet
 
 ```
 FLAT                          PEERING MESH                 HUB-AND-SPOKE
-┌───────────────────┐         ┌─────┐ ┌─────┐              ┌──────────────────┐
-│  One big VPC      │         │ VPC ├─┤ VPC │              │       HUB        │
-│  ┌────┐ ┌────┐    │         └──┬──┘ └──┬──┘              │ FW · DNS · NAT   │
-│  │team│ │team│    │            │  ╳    │  (n·(n-1)/2)   │ VPN · Proxy ·    │
-│  └────┘ └────┘    │         ┌──┴──┐ ┌──┴──┐             │ Logging · Bastion│
-│  subnet fences    │         │ VPC ├─┤ VPC │             └───┬────┬────┬───┘
-└───────────────────┘         └─────┘ └─────┘              ┌──┴─┐┌─┴──┐┌┴───┐
+┌───────────────────┐         ┌─────┐ ┌─────┐              ┌──────────────────────┐
+│  One big VPC      │         │ VPC ├─┤ VPC │              │       HUB            │
+│  ┌────┐ ┌────┐    │         └──┬──┘ └──┬──┘              │ FW · DNS · NAT       │
+│  │team│ │team│    │            │  ╳    │  (n·(n-1)/2)    │ VPN · Proxy ·        │
+│  └────┘ └────┘    │         ┌──┴──┐ ┌──┴──┐              │ Logging · Bastion.   │
+│  subnet fences    │         │ VPC ├─┤ VPC │              └─────┬──────┬─────┬───┘
+└───────────────────┘         └─────┘ └─────┘                 ┌──┴──┐┌──┴──┐┌─┴───┐
                                                               │SPOKE││SPOKE││SPOKE│
-                                                              └─────┘└────┘└────┘
+                                                              └─────┘└─────┘└─────┘
 ```
 
 ### Decision Guide
