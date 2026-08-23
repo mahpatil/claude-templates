@@ -48,6 +48,7 @@ cat README.md
 | Microservices | 📋 Beta | Platform Agnostic | [View](./standards/detailed/microservices.md)  |
 | API Design | 📋 Beta | Platform Agnostic | [View](./standards/detailed/api-design.md)  |
 | Data Architecture | 📋 Beta | AWS, Azure, GCP | [View](./standards/detailed/data/README.md) |
+| Cloud Network Topology (Hub & Spoke, PCI, API Gateways) | 📋 Beta | AWS, Azure, GCP | [View](./standards/detailed/networking/cloud-network-topology.md) |
 | Integration Patterns | 📋 Beta | Platform Agnostic | [View](./standards/detailed/integration/data-integration-patterns.md) |
 | DevSecOps practices | 📋 Planned | Multi-cloud | Coming soon |
 | CI/CD Pipeline | 📋 Planned | AWS, Azure, GCP | [View](./standards/detailed/cicd-pipeline.md) |
